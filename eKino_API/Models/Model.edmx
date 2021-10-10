@@ -1,0 +1,2029 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="eKinoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Clanovi">
+          <Key>
+            <PropertyRef Name="ClanID" />
+          </Key>
+          <Property Name="ClanID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ime" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="Prezime" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DatumRegistracije" Type="datetime" Nullable="false" />
+          <Property Name="KorisnickoIme" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LozinkaHash" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LozinkaSalt" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="Slika" Type="varbinary(max)" />
+          <Property Name="SlikaThumb" Type="varbinary(max)" />
+          <Property Name="ZanrID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Dvorane">
+          <Key>
+            <PropertyRef Name="DvoranaID" />
+          </Key>
+          <Property Name="DvoranaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naziv" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="Kapacitet" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Filmovi">
+          <Key>
+            <PropertyRef Name="FilmID" />
+          </Key>
+          <Property Name="FilmID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naziv" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="IzvorniNaziv" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="GodinaIzdavanja" Type="smallint" Nullable="false" />
+          <Property Name="Trajanje" Type="smallint" Nullable="false" />
+          <Property Name="Opis" Type="ntext" />
+          <Property Name="Slika" Type="varbinary(max)" />
+          <Property Name="SlikaThumb" Type="varbinary(max)" />
+          <Property Name="Trailer" Type="nvarchar" MaxLength="250" />
+          <Property Name="Aktivan" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FilmoviZanrovi">
+          <Key>
+            <PropertyRef Name="FilmZanrID" />
+          </Key>
+          <Property Name="FilmZanrID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FilmID" Type="int" Nullable="false" />
+          <Property Name="ZanrID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Korisnici">
+          <Key>
+            <PropertyRef Name="KorisnikID" />
+          </Key>
+          <Property Name="KorisnikID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ime" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Prezime" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Telefon" Type="nvarchar" MaxLength="20" />
+          <Property Name="KorisnickoIme" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LozinkaHash" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LozinkaSalt" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="Slika" Type="varbinary(max)" />
+          <Property Name="SlikaThumb" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="KorisniciUloge">
+          <Key>
+            <PropertyRef Name="KorisnikUlogaID" />
+          </Key>
+          <Property Name="KorisnikUlogaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KorisnikID" Type="int" Nullable="false" />
+          <Property Name="UlogaID" Type="int" Nullable="false" />
+          <Property Name="DatumIzmjene" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ocjene">
+          <Key>
+            <PropertyRef Name="OcjenaID" />
+          </Key>
+          <Property Name="OcjenaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FilmID" Type="int" Nullable="false" />
+          <Property Name="ClanID" Type="int" Nullable="false" />
+          <Property Name="Datum" Type="datetime" Nullable="false" />
+          <Property Name="Ocjena" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Projekcije">
+          <Key>
+            <PropertyRef Name="ProjekcijaID" />
+          </Key>
+          <Property Name="ProjekcijaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FilmID" Type="int" Nullable="false" />
+          <Property Name="DvoranaID" Type="int" Nullable="false" />
+          <Property Name="UslugaID" Type="int" Nullable="false" />
+          <Property Name="DatumProjekcije" Type="datetime" Nullable="false" />
+          <Property Name="Aktivna" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Rezervacije">
+          <Key>
+            <PropertyRef Name="RezervacijaID" />
+          </Key>
+          <Property Name="RezervacijaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VrijemeRezervacije" Type="datetime" Nullable="false" />
+          <Property Name="Napomena" Type="nvarchar" MaxLength="150" />
+          <Property Name="ClanID" Type="int" Nullable="false" />
+          <Property Name="KorisnikID" Type="int" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <EntityType Name="Sjedala">
+          <Key>
+            <PropertyRef Name="SjedaloID" />
+          </Key>
+          <Property Name="SjedaloID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DvoranaID" Type="int" Nullable="false" />
+          <Property Name="PozicijaX" Type="smallint" Nullable="false" />
+          <Property Name="PozicijaY" Type="smallint" Nullable="false" />
+          <Property Name="isZauzeto" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ulaznice">
+          <Key>
+            <PropertyRef Name="UlaznicaID" />
+          </Key>
+          <Property Name="UlaznicaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjekcijaID" Type="int" Nullable="false" />
+          <Property Name="SjedaloID" Type="int" Nullable="false" />
+          <Property Name="RezervacijaID" Type="int" Nullable="false" />
+          <Property Name="Procesirano" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Uloge">
+          <Key>
+            <PropertyRef Name="UlogaID" />
+          </Key>
+          <Property Name="UlogaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naziv" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Opis" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Usluge">
+          <Key>
+            <PropertyRef Name="UslugaID" />
+          </Key>
+          <Property Name="UslugaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naziv" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="Cijena" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Zanrovi">
+          <Key>
+            <PropertyRef Name="ZanrID" />
+          </Key>
+          <Property Name="ZanrID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naziv" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Clanovi_Zanrovi">
+          <End Role="Zanrovi" Type="Self.Zanrovi" Multiplicity="1" />
+          <End Role="Clanovi" Type="Self.Clanovi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zanrovi">
+              <PropertyRef Name="ZanrID" />
+            </Principal>
+            <Dependent Role="Clanovi">
+              <PropertyRef Name="ZanrID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FilmoviZanrovi_Filmovi">
+          <End Role="Filmovi" Type="Self.Filmovi" Multiplicity="1" />
+          <End Role="FilmoviZanrovi" Type="Self.FilmoviZanrovi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Filmovi">
+              <PropertyRef Name="FilmID" />
+            </Principal>
+            <Dependent Role="FilmoviZanrovi">
+              <PropertyRef Name="FilmID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FilmoviZanrovi_Zanrovi">
+          <End Role="Zanrovi" Type="Self.Zanrovi" Multiplicity="1" />
+          <End Role="FilmoviZanrovi" Type="Self.FilmoviZanrovi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zanrovi">
+              <PropertyRef Name="ZanrID" />
+            </Principal>
+            <Dependent Role="FilmoviZanrovi">
+              <PropertyRef Name="ZanrID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KorisniciUloge_Korisnici">
+          <End Role="Korisnici" Type="Self.Korisnici" Multiplicity="1" />
+          <End Role="KorisniciUloge" Type="Self.KorisniciUloge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Korisnici">
+              <PropertyRef Name="KorisnikID" />
+            </Principal>
+            <Dependent Role="KorisniciUloge">
+              <PropertyRef Name="KorisnikID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KorisniciUloge_Uloge">
+          <End Role="Uloge" Type="Self.Uloge" Multiplicity="1" />
+          <End Role="KorisniciUloge" Type="Self.KorisniciUloge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Uloge">
+              <PropertyRef Name="UlogaID" />
+            </Principal>
+            <Dependent Role="KorisniciUloge">
+              <PropertyRef Name="UlogaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ocjene_Clanovi">
+          <End Role="Clanovi" Type="Self.Clanovi" Multiplicity="1" />
+          <End Role="Ocjene" Type="Self.Ocjene" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clanovi">
+              <PropertyRef Name="ClanID" />
+            </Principal>
+            <Dependent Role="Ocjene">
+              <PropertyRef Name="ClanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ocjene_Filmovi">
+          <End Role="Filmovi" Type="Self.Filmovi" Multiplicity="1" />
+          <End Role="Ocjene" Type="Self.Ocjene" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Filmovi">
+              <PropertyRef Name="FilmID" />
+            </Principal>
+            <Dependent Role="Ocjene">
+              <PropertyRef Name="FilmID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Projekcije_Dvorane">
+          <End Role="Dvorane" Type="Self.Dvorane" Multiplicity="1" />
+          <End Role="Projekcije" Type="Self.Projekcije" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dvorane">
+              <PropertyRef Name="DvoranaID" />
+            </Principal>
+            <Dependent Role="Projekcije">
+              <PropertyRef Name="DvoranaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Projekcije_Filmovi">
+          <End Role="Filmovi" Type="Self.Filmovi" Multiplicity="1" />
+          <End Role="Projekcije" Type="Self.Projekcije" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Filmovi">
+              <PropertyRef Name="FilmID" />
+            </Principal>
+            <Dependent Role="Projekcije">
+              <PropertyRef Name="FilmID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Projekcije_Usluge">
+          <End Role="Usluge" Type="Self.Usluge" Multiplicity="1" />
+          <End Role="Projekcije" Type="Self.Projekcije" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usluge">
+              <PropertyRef Name="UslugaID" />
+            </Principal>
+            <Dependent Role="Projekcije">
+              <PropertyRef Name="UslugaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rezervacije_Clanovi">
+          <End Role="Clanovi" Type="Self.Clanovi" Multiplicity="1" />
+          <End Role="Rezervacije" Type="Self.Rezervacije" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clanovi">
+              <PropertyRef Name="ClanID" />
+            </Principal>
+            <Dependent Role="Rezervacije">
+              <PropertyRef Name="ClanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rezervacije_Korisnici">
+          <End Role="Korisnici" Type="Self.Korisnici" Multiplicity="0..1" />
+          <End Role="Rezervacije" Type="Self.Rezervacije" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Korisnici">
+              <PropertyRef Name="KorisnikID" />
+            </Principal>
+            <Dependent Role="Rezervacije">
+              <PropertyRef Name="KorisnikID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sjedala_Dvorane">
+          <End Role="Dvorane" Type="Self.Dvorane" Multiplicity="1" />
+          <End Role="Sjedala" Type="Self.Sjedala" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dvorane">
+              <PropertyRef Name="DvoranaID" />
+            </Principal>
+            <Dependent Role="Sjedala">
+              <PropertyRef Name="DvoranaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ulaznice_Projekcije">
+          <End Role="Projekcije" Type="Self.Projekcije" Multiplicity="1" />
+          <End Role="Ulaznice" Type="Self.Ulaznice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projekcije">
+              <PropertyRef Name="ProjekcijaID" />
+            </Principal>
+            <Dependent Role="Ulaznice">
+              <PropertyRef Name="ProjekcijaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ulaznice_Rezervacije">
+          <End Role="Rezervacije" Type="Self.Rezervacije" Multiplicity="1" />
+          <End Role="Ulaznice" Type="Self.Ulaznice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rezervacije">
+              <PropertyRef Name="RezervacijaID" />
+            </Principal>
+            <Dependent Role="Ulaznice">
+              <PropertyRef Name="RezervacijaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ulaznice_Sjedala">
+          <End Role="Sjedala" Type="Self.Sjedala" Multiplicity="1" />
+          <End Role="Ulaznice" Type="Self.Ulaznice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sjedala">
+              <PropertyRef Name="SjedaloID" />
+            </Principal>
+            <Dependent Role="Ulaznice">
+              <PropertyRef Name="SjedaloID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="esp_Clanovi_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Ime" Type="nvarchar" Mode="In" />
+          <Parameter Name="Prezime" Type="nvarchar" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+          <Parameter Name="DatumRegistracije" Type="datetime" Mode="In" />
+          <Parameter Name="KorisnickoIme" Type="nvarchar" Mode="In" />
+          <Parameter Name="LozinkaHash" Type="nvarchar" Mode="In" />
+          <Parameter Name="LozinkaSalt" Type="nvarchar" Mode="In" />
+          <Parameter Name="Slika" Type="varbinary(max)" Mode="In" />
+          <Parameter Name="SlikaThumb" Type="varbinary(max)" Mode="In" />
+          <Parameter Name="ZanrID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="esp_Clanovi_SelectByNaziv" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="KorisnickoIme" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="esp_Clanovi_StatusFalse" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ClanID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="esp_Clanovi_StatusTrue" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ClanID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="esp_Dvorane_GetDvoranaByNaziv" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Naziv" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="esp_Dvorane_SelectByNaziv" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Naziv" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="esp_Dvorane_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DvoranaID" Type="int" Mode="In" />
+          <Parameter Name="Naziv" Type="nvarchar" Mode="In" />
+          <Parameter Name="Kapacitet" Type="smallint" Mode="In" />
+        </Function>
+        <Function Name="esp_Filmovi_GetByID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FilmID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="esp_Filmovi_GetProsjek" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FilmID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="esp_Filmovi_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Naziv" Type="nvarchar" Mode="In" />
+          <Parameter Name="IzvorniNaziv" Type="nvarchar" Mode="In" />
+          <Parameter Name="GodinaIzdavanja" Type="smallint" Mode="In" />
+          <Parameter Name="Trajanje" Type="smallint" Mode="In" />
+          <Parameter Name="Opis" Type="ntext" Mode="In" />
+          <Parameter Name="Slika" Type="varbinary(max)" Mode="In" />
+          <Parameter Name="SlikaThumb" Type="varbinary(max)" Mode="In" />
+          <Parameter Name="Trailer" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="esp_Filmovi_Search" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Naziv" Type="nvarchar" Mode="In" />
+          <Parameter Name="ZanrID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="esp_Filmovi_SelectByNaziv" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Naziv" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="esp_Filmovi_SelectByZanr" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ZanrID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="esp_Filmovi_SelectByZarada" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Godina" Type="int" Mode="In" />
+        </Function>
+        <Function Name="esp_Filmovi_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FilmID" Type="int" Mode="In" />
+          <Parameter Name="Naziv" Type="nvarchar" Mode="In" />
+          <Parameter Name="IzvorniNaziv" Type="nvarchar" Mode="In" />
+          <Parameter Name="GodinaIzdavanja" Type="smallint" Mode="In" />
+          <Parameter Name="Trajanje" Type="smallint" Mode="In" />
+          <Parameter Name="Opis" Type="ntext" Mode="In" />
+          <Parameter Name="Slika" Type="varbinary(max)" Mode="In" />
+          <Parameter Name="SlikaThumb" Type="varbinary(max)" Mode="In" />
+          <Parameter Name="Trailer" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="esp_FilmoviOsobe_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FilmID" Type="int" Mode="In" />
+          <Parameter Name="OsobaID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="esp_FilmoviZanrovi_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FilmID" Type="int" Mode="In" />
+          <Parameter Name="ZanrID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="esp_Korisnici_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Ime" Type="nvarchar" Mode="In" />
+          <Parameter Name="Prezime" Type="nvarchar" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+          <Parameter Name="Telefon" Type="nvarchar" Mode="In" />
+          <Parameter Name="KorisnickoIme" Type="nvarchar" Mode="In" />
+          <Parameter Name="LozinkaSalt" Type="nvarchar" Mode="In" />
+          <Parameter Name="LozinkaHash" Type="nvarchar" Mode="In" />
+          <Parameter Name="Slika" Type="varbinary(max)" Mode="In" />
+          <Parameter Name="SlikaThumb" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="esp_Korisnici_SelectByImePrezime" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ImePrezime" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="esp_Korisnici_SelectByKorisnickoIme" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="KorisnickoIme" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="esp_Korisnici_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="KorisnikID" Type="int" Mode="In" />
+          <Parameter Name="Ime" Type="nvarchar" Mode="In" />
+          <Parameter Name="Prezime" Type="nvarchar" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+          <Parameter Name="Telefon" Type="nvarchar" Mode="In" />
+          <Parameter Name="KorisnickoIme" Type="nvarchar" Mode="In" />
+          <Parameter Name="LozinkaSalt" Type="nvarchar" Mode="In" />
+          <Parameter Name="LozinkaHash" Type="nvarchar" Mode="In" />
+          <Parameter Name="Status" Type="bit" Mode="In" />
+          <Parameter Name="Slika" Type="varbinary(max)" Mode="In" />
+          <Parameter Name="SlikaThumb" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="esp_KorisniciUloge_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="KorisnikID" Type="int" Mode="In" />
+          <Parameter Name="UlogaID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="esp_Ocjene_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FilmID" Type="int" Mode="In" />
+          <Parameter Name="ClanID" Type="int" Mode="In" />
+          <Parameter Name="Ocjena" Type="int" Mode="In" />
+        </Function>
+        <Function Name="esp_Osobe_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="VrstaID" Type="int" Mode="In" />
+          <Parameter Name="Ime" Type="nvarchar" Mode="In" />
+          <Parameter Name="Prezime" Type="nvarchar" Mode="In" />
+          <Parameter Name="Slika" Type="varbinary(max)" Mode="In" />
+          <Parameter Name="SlikaThumb" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="esp_Projekcije_GetCijena" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ProjekcijaID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="esp_Projekcije_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FilmID" Type="int" Mode="In" />
+          <Parameter Name="DvoranaID" Type="int" Mode="In" />
+          <Parameter Name="UslugaID" Type="int" Mode="In" />
+          <Parameter Name="DatumProjekcije" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="esp_Projekcije_SelectAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="esp_Projekcije_SelectByDvorana" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DvoranaID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="esp_Projekcije_SelectByGodina" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="esp_Projekcije_SelectByNazivFilma" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Naziv" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="esp_Projekcije_SelectByUsluga" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UslugaID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="esp_Projekcije_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ProjekcijaID" Type="int" Mode="In" />
+          <Parameter Name="FilmID" Type="int" Mode="In" />
+          <Parameter Name="DvoranaID" Type="int" Mode="In" />
+          <Parameter Name="UslugaID" Type="int" Mode="In" />
+          <Parameter Name="DatumProjekcije" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="esp_Rezervacije_GetAktivneByClanID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ClanID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="esp_Rezervacije_GetByClanID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ClanID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="esp_Rezervacije_GetByClanovi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="KorisnickoIme" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="esp_Rezervacije_GetByFilmovi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Film" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="esp_Rezervacije_GetByKorisnickoIme" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="KorisnickoIme" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="esp_Rezervacije_GetByZanrovi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Zanr" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="esp_Rezervacije_GetDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RezervacijaID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="esp_Rezervacije_GetKarte" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="KorisnickoIme" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="esp_Rezervacije_GetKartuByUlaznica" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UlaznicaID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="esp_Rezervacije_GetProcesirane" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="KorisnickoIme" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="esp_Rezervacije_GetProcesiraneByClanID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ClanID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="esp_Rezervacije_GetUkupnoByYear" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="esp_Rezervacije_UpdateStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="esp_Sjedala_GetByRezervacija" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RezervacijaID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="esp_Usluge_GetByName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Naziv" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="esp_Zanrovi_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ZanrID" Type="int" Mode="In" />
+          <Parameter Name="Naziv" Type="nvarchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="eKinoModelStoreContainer">
+          <EntitySet Name="Clanovi" EntityType="Self.Clanovi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dvorane" EntityType="Self.Dvorane" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Filmovi" EntityType="Self.Filmovi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FilmoviZanrovi" EntityType="Self.FilmoviZanrovi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Korisnici" EntityType="Self.Korisnici" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KorisniciUloge" EntityType="Self.KorisniciUloge" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ocjene" EntityType="Self.Ocjene" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Projekcije" EntityType="Self.Projekcije" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rezervacije" EntityType="Self.Rezervacije" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sjedala" EntityType="Self.Sjedala" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ulaznice" EntityType="Self.Ulaznice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Uloge" EntityType="Self.Uloge" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usluge" EntityType="Self.Usluge" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Zanrovi" EntityType="Self.Zanrovi" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Clanovi_Zanrovi" Association="Self.FK_Clanovi_Zanrovi">
+            <End Role="Zanrovi" EntitySet="Zanrovi" />
+            <End Role="Clanovi" EntitySet="Clanovi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FilmoviZanrovi_Filmovi" Association="Self.FK_FilmoviZanrovi_Filmovi">
+            <End Role="Filmovi" EntitySet="Filmovi" />
+            <End Role="FilmoviZanrovi" EntitySet="FilmoviZanrovi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FilmoviZanrovi_Zanrovi" Association="Self.FK_FilmoviZanrovi_Zanrovi">
+            <End Role="Zanrovi" EntitySet="Zanrovi" />
+            <End Role="FilmoviZanrovi" EntitySet="FilmoviZanrovi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KorisniciUloge_Korisnici" Association="Self.FK_KorisniciUloge_Korisnici">
+            <End Role="Korisnici" EntitySet="Korisnici" />
+            <End Role="KorisniciUloge" EntitySet="KorisniciUloge" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KorisniciUloge_Uloge" Association="Self.FK_KorisniciUloge_Uloge">
+            <End Role="Uloge" EntitySet="Uloge" />
+            <End Role="KorisniciUloge" EntitySet="KorisniciUloge" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ocjene_Clanovi" Association="Self.FK_Ocjene_Clanovi">
+            <End Role="Clanovi" EntitySet="Clanovi" />
+            <End Role="Ocjene" EntitySet="Ocjene" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ocjene_Filmovi" Association="Self.FK_Ocjene_Filmovi">
+            <End Role="Filmovi" EntitySet="Filmovi" />
+            <End Role="Ocjene" EntitySet="Ocjene" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Projekcije_Dvorane" Association="Self.FK_Projekcije_Dvorane">
+            <End Role="Dvorane" EntitySet="Dvorane" />
+            <End Role="Projekcije" EntitySet="Projekcije" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Projekcije_Filmovi" Association="Self.FK_Projekcije_Filmovi">
+            <End Role="Filmovi" EntitySet="Filmovi" />
+            <End Role="Projekcije" EntitySet="Projekcije" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Projekcije_Usluge" Association="Self.FK_Projekcije_Usluge">
+            <End Role="Usluge" EntitySet="Usluge" />
+            <End Role="Projekcije" EntitySet="Projekcije" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rezervacije_Clanovi" Association="Self.FK_Rezervacije_Clanovi">
+            <End Role="Clanovi" EntitySet="Clanovi" />
+            <End Role="Rezervacije" EntitySet="Rezervacije" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rezervacije_Korisnici" Association="Self.FK_Rezervacije_Korisnici">
+            <End Role="Korisnici" EntitySet="Korisnici" />
+            <End Role="Rezervacije" EntitySet="Rezervacije" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sjedala_Dvorane" Association="Self.FK_Sjedala_Dvorane">
+            <End Role="Dvorane" EntitySet="Dvorane" />
+            <End Role="Sjedala" EntitySet="Sjedala" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ulaznice_Projekcije" Association="Self.FK_Ulaznice_Projekcije">
+            <End Role="Projekcije" EntitySet="Projekcije" />
+            <End Role="Ulaznice" EntitySet="Ulaznice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ulaznice_Rezervacije" Association="Self.FK_Ulaznice_Rezervacije">
+            <End Role="Rezervacije" EntitySet="Rezervacije" />
+            <End Role="Ulaznice" EntitySet="Ulaznice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ulaznice_Sjedala" Association="Self.FK_Ulaznice_Sjedala">
+            <End Role="Sjedala" EntitySet="Sjedala" />
+            <End Role="Ulaznice" EntitySet="Ulaznice" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="eKinoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Clanovi">
+          <Key>
+            <PropertyRef Name="ClanID" />
+          </Key>
+          <Property Name="ClanID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ime" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Prezime" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DatumRegistracije" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="KorisnickoIme" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LozinkaHash" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LozinkaSalt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="Slika" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="SlikaThumb" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Ocjene" Relationship="Self.FK_Ocjene_Clanovi" FromRole="Clanovi" ToRole="Ocjene" />
+          <NavigationProperty Name="Rezervacije" Relationship="Self.FK_Rezervacije_Clanovi" FromRole="Clanovi" ToRole="Rezervacije" />
+          <Property Name="ZanrID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Zanrovi" Relationship="eKinoModel.FK_Clanovi_Zanrovi" FromRole="Clanovi" ToRole="Zanrovi" />
+        </EntityType>
+        <EntityType Name="Dvorane">
+          <Key>
+            <PropertyRef Name="DvoranaID" />
+          </Key>
+          <Property Name="DvoranaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Kapacitet" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="Projekcije" Relationship="Self.FK_Projekcije_Dvorane" FromRole="Dvorane" ToRole="Projekcije" />
+          <NavigationProperty Name="Sjedala" Relationship="Self.FK_Sjedala_Dvorane" FromRole="Dvorane" ToRole="Sjedala" />
+        </EntityType>
+        <EntityType Name="Filmovi">
+          <Key>
+            <PropertyRef Name="FilmID" />
+          </Key>
+          <Property Name="FilmID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IzvorniNaziv" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="GodinaIzdavanja" Type="Int16" Nullable="false" />
+          <Property Name="Trajanje" Type="Int16" Nullable="false" />
+          <Property Name="Opis" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Slika" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="SlikaThumb" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Trailer" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="FilmoviZanrovi" Relationship="Self.FK_FilmoviZanrovi_Filmovi" FromRole="Filmovi" ToRole="FilmoviZanrovi" />
+          <NavigationProperty Name="Ocjene" Relationship="Self.FK_Ocjene_Filmovi" FromRole="Filmovi" ToRole="Ocjene" />
+          <NavigationProperty Name="Projekcije" Relationship="Self.FK_Projekcije_Filmovi" FromRole="Filmovi" ToRole="Projekcije" />
+          <Property Name="Aktivan" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FilmoviZanrovi">
+          <Key>
+            <PropertyRef Name="FilmZanrID" />
+          </Key>
+          <Property Name="FilmZanrID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FilmID" Type="Int32" Nullable="false" />
+          <Property Name="ZanrID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Filmovi" Relationship="Self.FK_FilmoviZanrovi_Filmovi" FromRole="FilmoviZanrovi" ToRole="Filmovi" />
+          <NavigationProperty Name="Zanrovi" Relationship="Self.FK_FilmoviZanrovi_Zanrovi" FromRole="FilmoviZanrovi" ToRole="Zanrovi" />
+        </EntityType>
+        <EntityType Name="Korisnici">
+          <Key>
+            <PropertyRef Name="KorisnikID" />
+          </Key>
+          <Property Name="KorisnikID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Prezime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Telefon" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="KorisnickoIme" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LozinkaHash" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LozinkaSalt" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="Slika" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="SlikaThumb" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="KorisniciUloge" Relationship="Self.FK_KorisniciUloge_Korisnici" FromRole="Korisnici" ToRole="KorisniciUloge" />
+          <NavigationProperty Name="Rezervacije" Relationship="Self.FK_Rezervacije_Korisnici" FromRole="Korisnici" ToRole="Rezervacije" />
+        </EntityType>
+        <EntityType Name="KorisniciUloge">
+          <Key>
+            <PropertyRef Name="KorisnikUlogaID" />
+          </Key>
+          <Property Name="KorisnikUlogaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KorisnikID" Type="Int32" Nullable="false" />
+          <Property Name="UlogaID" Type="Int32" Nullable="false" />
+          <Property Name="DatumIzmjene" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Korisnici" Relationship="Self.FK_KorisniciUloge_Korisnici" FromRole="KorisniciUloge" ToRole="Korisnici" />
+          <NavigationProperty Name="Uloge" Relationship="Self.FK_KorisniciUloge_Uloge" FromRole="KorisniciUloge" ToRole="Uloge" />
+        </EntityType>
+        <EntityType Name="Ocjene">
+          <Key>
+            <PropertyRef Name="OcjenaID" />
+          </Key>
+          <Property Name="OcjenaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FilmID" Type="Int32" Nullable="false" />
+          <Property Name="ClanID" Type="Int32" Nullable="false" />
+          <Property Name="Datum" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Ocjena" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Clanovi" Relationship="Self.FK_Ocjene_Clanovi" FromRole="Ocjene" ToRole="Clanovi" />
+          <NavigationProperty Name="Filmovi" Relationship="Self.FK_Ocjene_Filmovi" FromRole="Ocjene" ToRole="Filmovi" />
+        </EntityType>
+        <EntityType Name="Projekcije">
+          <Key>
+            <PropertyRef Name="ProjekcijaID" />
+          </Key>
+          <Property Name="ProjekcijaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FilmID" Type="Int32" Nullable="false" />
+          <Property Name="DvoranaID" Type="Int32" Nullable="false" />
+          <Property Name="UslugaID" Type="Int32" Nullable="false" />
+          <Property Name="DatumProjekcije" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Dvorane" Relationship="Self.FK_Projekcije_Dvorane" FromRole="Projekcije" ToRole="Dvorane" />
+          <NavigationProperty Name="Filmovi" Relationship="Self.FK_Projekcije_Filmovi" FromRole="Projekcije" ToRole="Filmovi" />
+          <NavigationProperty Name="Usluge" Relationship="Self.FK_Projekcije_Usluge" FromRole="Projekcije" ToRole="Usluge" />
+          <NavigationProperty Name="Ulaznice" Relationship="Self.FK_Ulaznice_Projekcije" FromRole="Projekcije" ToRole="Ulaznice" />
+          <Property Name="Aktivna" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Rezervacije">
+          <Key>
+            <PropertyRef Name="RezervacijaID" />
+          </Key>
+          <Property Name="RezervacijaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VrijemeRezervacije" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Napomena" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ClanID" Type="Int32" Nullable="false" />
+          <Property Name="KorisnikID" Type="Int32" />
+          <Property Name="Status" Type="Boolean" />
+          <NavigationProperty Name="Clanovi" Relationship="Self.FK_Rezervacije_Clanovi" FromRole="Rezervacije" ToRole="Clanovi" />
+          <NavigationProperty Name="Korisnici" Relationship="Self.FK_Rezervacije_Korisnici" FromRole="Rezervacije" ToRole="Korisnici" />
+          <NavigationProperty Name="Ulaznice" Relationship="Self.FK_Ulaznice_Rezervacije" FromRole="Rezervacije" ToRole="Ulaznice" />
+        </EntityType>
+        <EntityType Name="Sjedala">
+          <Key>
+            <PropertyRef Name="SjedaloID" />
+          </Key>
+          <Property Name="SjedaloID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DvoranaID" Type="Int32" Nullable="false" />
+          <Property Name="PozicijaX" Type="Int16" Nullable="false" />
+          <Property Name="PozicijaY" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="Dvorane" Relationship="Self.FK_Sjedala_Dvorane" FromRole="Sjedala" ToRole="Dvorane" />
+          <NavigationProperty Name="Ulaznice" Relationship="Self.FK_Ulaznice_Sjedala" FromRole="Sjedala" ToRole="Ulaznice" />
+          <Property Name="isZauzeto" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ulaznice">
+          <Key>
+            <PropertyRef Name="UlaznicaID" />
+          </Key>
+          <Property Name="UlaznicaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjekcijaID" Type="Int32" Nullable="false" />
+          <Property Name="SjedaloID" Type="Int32" Nullable="false" />
+          <Property Name="RezervacijaID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Projekcije" Relationship="Self.FK_Ulaznice_Projekcije" FromRole="Ulaznice" ToRole="Projekcije" />
+          <NavigationProperty Name="Rezervacije" Relationship="Self.FK_Ulaznice_Rezervacije" FromRole="Ulaznice" ToRole="Rezervacije" />
+          <NavigationProperty Name="Sjedala" Relationship="Self.FK_Ulaznice_Sjedala" FromRole="Ulaznice" ToRole="Sjedala" />
+          <Property Name="Procesirano" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Uloge">
+          <Key>
+            <PropertyRef Name="UlogaID" />
+          </Key>
+          <Property Name="UlogaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Opis" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="KorisniciUloge" Relationship="Self.FK_KorisniciUloge_Uloge" FromRole="Uloge" ToRole="KorisniciUloge" />
+        </EntityType>
+        <EntityType Name="Usluge">
+          <Key>
+            <PropertyRef Name="UslugaID" />
+          </Key>
+          <Property Name="UslugaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Cijena" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <NavigationProperty Name="Projekcije" Relationship="Self.FK_Projekcije_Usluge" FromRole="Usluge" ToRole="Projekcije" />
+        </EntityType>
+        <EntityType Name="Zanrovi">
+          <Key>
+            <PropertyRef Name="ZanrID" />
+          </Key>
+          <Property Name="ZanrID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="FilmoviZanrovi" Relationship="Self.FK_FilmoviZanrovi_Zanrovi" FromRole="Zanrovi" ToRole="FilmoviZanrovi" />
+          <NavigationProperty Name="Clanovi" Relationship="eKinoModel.FK_Clanovi_Zanrovi" FromRole="Zanrovi" ToRole="Clanovi" />
+        </EntityType>
+        <Association Name="FK_Ocjene_Clanovi">
+          <End Role="Clanovi" Type="Self.Clanovi" Multiplicity="1" />
+          <End Role="Ocjene" Type="Self.Ocjene" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clanovi">
+              <PropertyRef Name="ClanID" />
+            </Principal>
+            <Dependent Role="Ocjene">
+              <PropertyRef Name="ClanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rezervacije_Clanovi">
+          <End Role="Clanovi" Type="Self.Clanovi" Multiplicity="1" />
+          <End Role="Rezervacije" Type="Self.Rezervacije" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clanovi">
+              <PropertyRef Name="ClanID" />
+            </Principal>
+            <Dependent Role="Rezervacije">
+              <PropertyRef Name="ClanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Projekcije_Dvorane">
+          <End Role="Dvorane" Type="Self.Dvorane" Multiplicity="1" />
+          <End Role="Projekcije" Type="Self.Projekcije" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dvorane">
+              <PropertyRef Name="DvoranaID" />
+            </Principal>
+            <Dependent Role="Projekcije">
+              <PropertyRef Name="DvoranaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sjedala_Dvorane">
+          <End Role="Dvorane" Type="Self.Dvorane" Multiplicity="1" />
+          <End Role="Sjedala" Type="Self.Sjedala" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dvorane">
+              <PropertyRef Name="DvoranaID" />
+            </Principal>
+            <Dependent Role="Sjedala">
+              <PropertyRef Name="DvoranaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FilmoviZanrovi_Filmovi">
+          <End Role="Filmovi" Type="Self.Filmovi" Multiplicity="1" />
+          <End Role="FilmoviZanrovi" Type="Self.FilmoviZanrovi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Filmovi">
+              <PropertyRef Name="FilmID" />
+            </Principal>
+            <Dependent Role="FilmoviZanrovi">
+              <PropertyRef Name="FilmID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ocjene_Filmovi">
+          <End Role="Filmovi" Type="Self.Filmovi" Multiplicity="1" />
+          <End Role="Ocjene" Type="Self.Ocjene" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Filmovi">
+              <PropertyRef Name="FilmID" />
+            </Principal>
+            <Dependent Role="Ocjene">
+              <PropertyRef Name="FilmID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Projekcije_Filmovi">
+          <End Role="Filmovi" Type="Self.Filmovi" Multiplicity="1" />
+          <End Role="Projekcije" Type="Self.Projekcije" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Filmovi">
+              <PropertyRef Name="FilmID" />
+            </Principal>
+            <Dependent Role="Projekcije">
+              <PropertyRef Name="FilmID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FilmoviZanrovi_Zanrovi">
+          <End Role="Zanrovi" Type="Self.Zanrovi" Multiplicity="1" />
+          <End Role="FilmoviZanrovi" Type="Self.FilmoviZanrovi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zanrovi">
+              <PropertyRef Name="ZanrID" />
+            </Principal>
+            <Dependent Role="FilmoviZanrovi">
+              <PropertyRef Name="ZanrID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KorisniciUloge_Korisnici">
+          <End Role="Korisnici" Type="Self.Korisnici" Multiplicity="1" />
+          <End Role="KorisniciUloge" Type="Self.KorisniciUloge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Korisnici">
+              <PropertyRef Name="KorisnikID" />
+            </Principal>
+            <Dependent Role="KorisniciUloge">
+              <PropertyRef Name="KorisnikID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rezervacije_Korisnici">
+          <End Role="Korisnici" Type="Self.Korisnici" Multiplicity="0..1" />
+          <End Role="Rezervacije" Type="Self.Rezervacije" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Korisnici">
+              <PropertyRef Name="KorisnikID" />
+            </Principal>
+            <Dependent Role="Rezervacije">
+              <PropertyRef Name="KorisnikID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KorisniciUloge_Uloge">
+          <End Role="Uloge" Type="Self.Uloge" Multiplicity="1" />
+          <End Role="KorisniciUloge" Type="Self.KorisniciUloge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Uloge">
+              <PropertyRef Name="UlogaID" />
+            </Principal>
+            <Dependent Role="KorisniciUloge">
+              <PropertyRef Name="UlogaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Projekcije_Usluge">
+          <End Role="Usluge" Type="Self.Usluge" Multiplicity="1" />
+          <End Role="Projekcije" Type="Self.Projekcije" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usluge">
+              <PropertyRef Name="UslugaID" />
+            </Principal>
+            <Dependent Role="Projekcije">
+              <PropertyRef Name="UslugaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ulaznice_Projekcije">
+          <End Role="Projekcije" Type="Self.Projekcije" Multiplicity="1" />
+          <End Role="Ulaznice" Type="Self.Ulaznice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projekcije">
+              <PropertyRef Name="ProjekcijaID" />
+            </Principal>
+            <Dependent Role="Ulaznice">
+              <PropertyRef Name="ProjekcijaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ulaznice_Rezervacije">
+          <End Role="Rezervacije" Type="Self.Rezervacije" Multiplicity="1" />
+          <End Role="Ulaznice" Type="Self.Ulaznice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rezervacije">
+              <PropertyRef Name="RezervacijaID" />
+            </Principal>
+            <Dependent Role="Ulaznice">
+              <PropertyRef Name="RezervacijaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ulaznice_Sjedala">
+          <End Role="Sjedala" Type="Self.Sjedala" Multiplicity="1" />
+          <End Role="Ulaznice" Type="Self.Ulaznice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sjedala">
+              <PropertyRef Name="SjedaloID" />
+            </Principal>
+            <Dependent Role="Ulaznice">
+              <PropertyRef Name="SjedaloID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="eKinoEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Clanovi" EntityType="Self.Clanovi" />
+          <EntitySet Name="Dvorane" EntityType="Self.Dvorane" />
+          <EntitySet Name="Filmovi" EntityType="Self.Filmovi" />
+          <EntitySet Name="FilmoviZanrovi" EntityType="Self.FilmoviZanrovi" />
+          <EntitySet Name="Korisnici" EntityType="Self.Korisnici" />
+          <EntitySet Name="KorisniciUloge" EntityType="Self.KorisniciUloge" />
+          <EntitySet Name="Ocjene" EntityType="Self.Ocjene" />
+          <EntitySet Name="Projekcije" EntityType="Self.Projekcije" />
+          <EntitySet Name="Rezervacije" EntityType="Self.Rezervacije" />
+          <EntitySet Name="Sjedala" EntityType="Self.Sjedala" />
+          <EntitySet Name="Ulaznice" EntityType="Self.Ulaznice" />
+          <EntitySet Name="Uloge" EntityType="Self.Uloge" />
+          <EntitySet Name="Usluge" EntityType="Self.Usluge" />
+          <EntitySet Name="Zanrovi" EntityType="Self.Zanrovi" />
+          <AssociationSet Name="FK_Ocjene_Clanovi" Association="Self.FK_Ocjene_Clanovi">
+            <End Role="Clanovi" EntitySet="Clanovi" />
+            <End Role="Ocjene" EntitySet="Ocjene" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rezervacije_Clanovi" Association="Self.FK_Rezervacije_Clanovi">
+            <End Role="Clanovi" EntitySet="Clanovi" />
+            <End Role="Rezervacije" EntitySet="Rezervacije" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Projekcije_Dvorane" Association="Self.FK_Projekcije_Dvorane">
+            <End Role="Dvorane" EntitySet="Dvorane" />
+            <End Role="Projekcije" EntitySet="Projekcije" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sjedala_Dvorane" Association="Self.FK_Sjedala_Dvorane">
+            <End Role="Dvorane" EntitySet="Dvorane" />
+            <End Role="Sjedala" EntitySet="Sjedala" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FilmoviZanrovi_Filmovi" Association="Self.FK_FilmoviZanrovi_Filmovi">
+            <End Role="Filmovi" EntitySet="Filmovi" />
+            <End Role="FilmoviZanrovi" EntitySet="FilmoviZanrovi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ocjene_Filmovi" Association="Self.FK_Ocjene_Filmovi">
+            <End Role="Filmovi" EntitySet="Filmovi" />
+            <End Role="Ocjene" EntitySet="Ocjene" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Projekcije_Filmovi" Association="Self.FK_Projekcije_Filmovi">
+            <End Role="Filmovi" EntitySet="Filmovi" />
+            <End Role="Projekcije" EntitySet="Projekcije" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FilmoviZanrovi_Zanrovi" Association="Self.FK_FilmoviZanrovi_Zanrovi">
+            <End Role="Zanrovi" EntitySet="Zanrovi" />
+            <End Role="FilmoviZanrovi" EntitySet="FilmoviZanrovi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KorisniciUloge_Korisnici" Association="Self.FK_KorisniciUloge_Korisnici">
+            <End Role="Korisnici" EntitySet="Korisnici" />
+            <End Role="KorisniciUloge" EntitySet="KorisniciUloge" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rezervacije_Korisnici" Association="Self.FK_Rezervacije_Korisnici">
+            <End Role="Korisnici" EntitySet="Korisnici" />
+            <End Role="Rezervacije" EntitySet="Rezervacije" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KorisniciUloge_Uloge" Association="Self.FK_KorisniciUloge_Uloge">
+            <End Role="Uloge" EntitySet="Uloge" />
+            <End Role="KorisniciUloge" EntitySet="KorisniciUloge" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Projekcije_Usluge" Association="Self.FK_Projekcije_Usluge">
+            <End Role="Usluge" EntitySet="Usluge" />
+            <End Role="Projekcije" EntitySet="Projekcije" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ulaznice_Projekcije" Association="Self.FK_Ulaznice_Projekcije">
+            <End Role="Projekcije" EntitySet="Projekcije" />
+            <End Role="Ulaznice" EntitySet="Ulaznice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ulaznice_Rezervacije" Association="Self.FK_Ulaznice_Rezervacije">
+            <End Role="Rezervacije" EntitySet="Rezervacije" />
+            <End Role="Ulaznice" EntitySet="Ulaznice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ulaznice_Sjedala" Association="Self.FK_Ulaznice_Sjedala">
+            <End Role="Sjedala" EntitySet="Sjedala" />
+            <End Role="Ulaznice" EntitySet="Ulaznice" />
+          </AssociationSet>
+          <FunctionImport Name="esp_Filmovi_Insert" ReturnType="Collection(Decimal)">
+            <Parameter Name="Naziv" Mode="In" Type="String" />
+            <Parameter Name="IzvorniNaziv" Mode="In" Type="String" />
+            <Parameter Name="GodinaIzdavanja" Mode="In" Type="Int16" />
+            <Parameter Name="Trajanje" Mode="In" Type="Int16" />
+            <Parameter Name="Opis" Mode="In" Type="String" />
+            <Parameter Name="Slika" Mode="In" Type="Binary" />
+            <Parameter Name="SlikaThumb" Mode="In" Type="Binary" />
+            <Parameter Name="Trailer" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="esp_Filmovi_SelectByNaziv" ReturnType="Collection(eKinoModel.Filmovi_Result)">
+          <Parameter Name="Naziv" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="esp_Filmovi_SelectByZanr" ReturnType="Collection(eKinoModel.Filmovi_Zanr_Result)">
+          <Parameter Name="ZanrID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="esp_Filmovi_Update">
+            <Parameter Name="FilmID" Mode="In" Type="Int32" />
+            <Parameter Name="Naziv" Mode="In" Type="String" />
+            <Parameter Name="IzvorniNaziv" Mode="In" Type="String" />
+            <Parameter Name="GodinaIzdavanja" Mode="In" Type="Int16" />
+            <Parameter Name="Trajanje" Mode="In" Type="Int16" />
+            <Parameter Name="Opis" Mode="In" Type="String" />
+            <Parameter Name="Slika" Mode="In" Type="Binary" />
+            <Parameter Name="SlikaThumb" Mode="In" Type="Binary" />
+            <Parameter Name="Trailer" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="esp_FilmoviOsobe_Insert">
+            <Parameter Name="FilmID" Mode="In" Type="Int32" />
+            <Parameter Name="OsobaID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="esp_FilmoviZanrovi_Insert">
+            <Parameter Name="FilmID" Mode="In" Type="Int32" />
+            <Parameter Name="ZanrID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="esp_Korisnici_Insert" ReturnType="Collection(Decimal)">
+            <Parameter Name="Ime" Mode="In" Type="String" />
+            <Parameter Name="Prezime" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Telefon" Mode="In" Type="String" />
+            <Parameter Name="KorisnickoIme" Mode="In" Type="String" />
+            <Parameter Name="LozinkaSalt" Mode="In" Type="String" />
+            <Parameter Name="LozinkaHash" Mode="In" Type="String" />
+            <Parameter Name="Slika" Mode="In" Type="Binary" />
+            <Parameter Name="SlikaThumb" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="esp_Korisnici_SelectByImePrezime" ReturnType="Collection(eKinoModel.Korisnici_Result)">
+          <Parameter Name="ImePrezime" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="esp_Korisnici_SelectByKorisnickoIme" EntitySet="Korisnici" ReturnType="Collection(eKinoModel.Korisnici)">
+          <Parameter Name="KorisnickoIme" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="esp_Korisnici_Update">
+            <Parameter Name="KorisnikID" Mode="In" Type="Int32" />
+            <Parameter Name="Ime" Mode="In" Type="String" />
+            <Parameter Name="Prezime" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Telefon" Mode="In" Type="String" />
+            <Parameter Name="KorisnickoIme" Mode="In" Type="String" />
+            <Parameter Name="LozinkaSalt" Mode="In" Type="String" />
+            <Parameter Name="LozinkaHash" Mode="In" Type="String" />
+            <Parameter Name="Status" Mode="In" Type="Boolean" />
+            <Parameter Name="Slika" Mode="In" Type="Binary" />
+            <Parameter Name="SlikaThumb" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="esp_KorisniciUloge_Insert">
+            <Parameter Name="KorisnikID" Mode="In" Type="Int32" />
+            <Parameter Name="UlogaID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="esp_Projekcije_Insert">
+            <Parameter Name="FilmID" Mode="In" Type="Int32" />
+            <Parameter Name="DvoranaID" Mode="In" Type="Int32" />
+            <Parameter Name="UslugaID" Mode="In" Type="Int32" />
+            <Parameter Name="DatumProjekcije" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="esp_Projekcije_SelectByDvorana" ReturnType="Collection(eKinoModel.Projekcije_Dvorana_Result)">
+          <Parameter Name="DvoranaID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="esp_Projekcije_SelectByNazivFilma" ReturnType="Collection(eKinoModel.Projekcije_Result)">
+          <Parameter Name="Naziv" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="esp_Projekcije_SelectByUsluga" ReturnType="Collection(eKinoModel.Projekcije_Usluga_Result)">
+          <Parameter Name="UslugaID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="esp_Projekcije_Update">
+            <Parameter Name="ProjekcijaID" Mode="In" Type="Int32" />
+            <Parameter Name="FilmID" Mode="In" Type="Int32" />
+            <Parameter Name="DvoranaID" Mode="In" Type="Int32" />
+            <Parameter Name="UslugaID" Mode="In" Type="Int32" />
+            <Parameter Name="DatumProjekcije" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="esp_Zanrovi_Update">
+            <Parameter Name="ZanrID" Mode="In" Type="Int32" />
+            <Parameter Name="Naziv" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="esp_Clanovi_SelectByNaziv" EntitySet="Clanovi" ReturnType="Collection(eKinoModel.Clanovi)">
+          <Parameter Name="KorisnickoIme" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="esp_Clanovi_StatusFalse">
+          <Parameter Name="ClanID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="esp_Clanovi_StatusTrue">
+          <Parameter Name="ClanID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="esp_Dvorane_GetDvoranaByNaziv" EntitySet="Dvorane" ReturnType="Collection(eKinoModel.Dvorane)">
+          <Parameter Name="Naziv" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="esp_Dvorane_SelectByNaziv" EntitySet="Dvorane" ReturnType="Collection(eKinoModel.Dvorane)">
+          <Parameter Name="Naziv" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="esp_Dvorane_Update">
+            <Parameter Name="DvoranaID" Mode="In" Type="Int32" />
+            <Parameter Name="Naziv" Mode="In" Type="String" />
+            <Parameter Name="Kapacitet" Mode="In" Type="Int16" />
+          </FunctionImport>
+          <FunctionImport Name="esp_Rezervacije_GetByClanovi" ReturnType="Collection(eKinoModel.esp_Rezervacije_GetByClanovi_Result)">
+          <Parameter Name="KorisnickoIme" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="esp_Rezervacije_GetByFilmovi" ReturnType="Collection(eKinoModel.esp_Rezervacije_GetByKorisnickoIme_Result)">
+          <Parameter Name="Film" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="esp_Rezervacije_GetByZanrovi" ReturnType="Collection(eKinoModel.esp_Rezervacije_GetByKorisnickoIme_Result)">
+          <Parameter Name="Zanr" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="esp_Rezervacije_GetProcesirane" ReturnType="Collection(eKinoModel.esp_Rezervacije_GetProcesirane_Result)">
+          <Parameter Name="KorisnickoIme" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="esp_Rezervacije_UpdateStatus">
+          <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="esp_Osobe_Insert" ReturnType="Collection(Decimal)">
+            <Parameter Name="VrstaID" Mode="In" Type="Int32" />
+            <Parameter Name="Ime" Mode="In" Type="String" />
+            <Parameter Name="Prezime" Mode="In" Type="String" />
+            <Parameter Name="Slika" Mode="In" Type="Binary" />
+            <Parameter Name="SlikaThumb" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="esp_Clanovi_Insert">
+            <Parameter Name="Ime" Mode="In" Type="String" />
+            <Parameter Name="Prezime" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="DatumRegistracije" Mode="In" Type="DateTime" />
+            <Parameter Name="KorisnickoIme" Mode="In" Type="String" />
+            <Parameter Name="LozinkaHash" Mode="In" Type="String" />
+            <Parameter Name="LozinkaSalt" Mode="In" Type="String" />
+            <Parameter Name="Slika" Mode="In" Type="Binary" />
+            <Parameter Name="SlikaThumb" Mode="In" Type="Binary" />
+            <Parameter Name="ZanrID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="esp_Projekcije_SelectAll" ReturnType="Collection(eKinoModel.Projekcije_All_Result)" />
+          <FunctionImport Name="esp_Clanovi_Update">
+            <Parameter Name="ClanID" Mode="In" Type="Int32" />
+            <Parameter Name="Ime" Mode="In" Type="String" />
+            <Parameter Name="Prezime" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="KorisnickoIme" Mode="In" Type="String" />
+            <Parameter Name="LozinkaSalt" Mode="In" Type="String" />
+            <Parameter Name="LozinkaHash" Mode="In" Type="String" />
+            <Parameter Name="Status" Mode="In" Type="Boolean" />
+            <Parameter Name="Slika" Mode="In" Type="Binary" />
+            <Parameter Name="SlikaThumb" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="esp_Projekcije_GetCijena" ReturnType="Collection(Decimal)">
+          <Parameter Name="ProjekcijaID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="esp_Rezervacije_GetByClanID" ReturnType="Collection(eKinoModel.esp_Rezervacije_GetByClanID_Result)">
+          <Parameter Name="ClanID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="esp_Rezervacije_GetUkupnoByYear" ReturnType="Collection(eKinoModel.esp_Rezervacije_GetUkupnoByYear_Result)">
+          </FunctionImport>
+          <FunctionImport Name="esp_Filmovi_GetByID" ReturnType="Collection(eKinoModel.Filmovi_GetByID_Result)">
+          <Parameter Name="FilmID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="esp_Ocjene_Insert">
+            <Parameter Name="FilmID" Mode="In" Type="Int32" />
+            <Parameter Name="ClanID" Mode="In" Type="Int32" />
+            <Parameter Name="Ocjena" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="esp_Filmovi_GetProsjek" ReturnType="Collection(Int32)">
+          <Parameter Name="FilmID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="esp_Usluge_GetByName" EntitySet="Usluge" ReturnType="Collection(eKinoModel.Usluge)">
+          <Parameter Name="Naziv" Mode="In" Type="String" />
+          </FunctionImport>
+          <AssociationSet Name="FK_Clanovi_Zanrovi" Association="eKinoModel.FK_Clanovi_Zanrovi">
+            <End Role="Zanrovi" EntitySet="Zanrovi" />
+            <End Role="Clanovi" EntitySet="Clanovi" />
+          </AssociationSet>
+          <FunctionImport Name="esp_Rezervacije_GetAktivneByClanID" ReturnType="Collection(eKinoModel.esp_Rezervacije_GetAktivneByClanID_Result)">
+          <Parameter Name="ClanID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="esp_Rezervacije_GetProcesiraneByClanID" ReturnType="Collection(eKinoModel.esp_Rezervacije_GetProcesiraneByClanID_Result)">
+          <Parameter Name="ClanID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="esp_Rezervacije_GetKarte" ReturnType="Collection(eKinoModel.esp_Rezervacije_GetKarte_Result)">
+          <Parameter Name="KorisnickoIme" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="esp_Filmovi_SelectByZarada" ReturnType="Collection(eKinoModel.Filmovi_Zarada_Result)">
+          <Parameter Name="Godina" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="esp_Projekcije_SelectByGodina" ReturnType="Collection(Int32)" />
+          <FunctionImport Name="esp_Rezervacije_GetDetails" ReturnType="Collection(eKinoModel.esp_Rezervacije_GetDetails_Result)">
+          <Parameter Name="RezervacijaID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="esp_Sjedala_GetByRezervacija" EntitySet="Sjedala" ReturnType="Collection(eKinoModel.Sjedala)">
+          <Parameter Name="RezervacijaID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="esp_Rezervacije_GetKartuByUlaznica" ReturnType="Collection(eKinoModel.esp_Rezervacije_GetKarte_Result)">
+          <Parameter Name="UlaznicaID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="esp_Rezervacije_GetByKorisnickoIme" ReturnType="Collection(eKinoModel.esp_Rezervacije_GetByKorisnickoIme_Result)">
+          <Parameter Name="KorisnickoIme" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="esp_Filmovi_Search" ReturnType="Collection(eKinoModel.esp_Filmovi_Search_Result)">
+            <Parameter Name="Naziv" Mode="In" Type="String" />
+            <Parameter Name="ZanrID" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="Filmovi_Result">
+          <Property Type="Int32" Name="FilmID" Nullable="false" />
+          <Property Type="String" Name="Naziv" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="IzvorniNaziv" Nullable="false" MaxLength="150" />
+          <Property Type="Int16" Name="GodinaIzdavanja" Nullable="false" />
+          <Property Type="Int16" Name="Trajanje" Nullable="false" />
+          <Property Type="Boolean" Name="Aktivan" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Korisnici_Result">
+          <Property Type="Int32" Name="KorisnikID" Nullable="false" />
+          <Property Type="String" Name="Ime" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Prezime" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Telefon" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="KorisnickoIme" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="Status" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="esp_Rezervacije_GetByClanovi_Result">
+          <Property Type="Int32" Name="RezervacijaID" Nullable="false" />
+          <Property Type="Int32" Name="ClanID" Nullable="false" />
+          <Property Type="Int32" Name="UlaznicaID" Nullable="false" />
+          <Property Type="Int32" Name="ProjekcijaID" Nullable="false" />
+          <Property Type="Int32" Name="ZanrID" Nullable="false" />
+          <Property Type="String" Name="Naziv_Filma" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="Zanr" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="Vrijeme_Rezervacije" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Korisnicko_Ime" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Napomena" Nullable="true" MaxLength="150" />
+          <Property Type="Int32" Name="UslugaID" Nullable="false" />
+          <Property Type="Decimal" Name="Cijena" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="Naziv" Nullable="false" MaxLength="150" />
+        </ComplexType>
+        <ComplexType Name="esp_Rezervacije_GetByFilmovi_Result">
+          <Property Type="Int32" Name="RezervacijaID" Nullable="false" />
+          <Property Type="Int32" Name="ClanID" Nullable="false" />
+          <Property Type="Int32" Name="UlaznicaID" Nullable="false" />
+          <Property Type="Int32" Name="ProjekcijaID" Nullable="false" />
+          <Property Type="Int32" Name="ZanrID" Nullable="false" />
+          <Property Type="String" Name="Naziv_Filma" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="Zanr" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="Vrijeme_Rezervacije" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Korisnicko_Ime" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Napomena" Nullable="true" MaxLength="150" />
+          <Property Type="Int32" Name="UslugaID" Nullable="false" />
+          <Property Type="Decimal" Name="Cijena" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="Naziv" Nullable="false" MaxLength="150" />
+        </ComplexType>
+        <ComplexType Name="esp_Rezervacije_GetByZanrovi_Result">
+          <Property Type="Int32" Name="RezervacijaID" Nullable="false" />
+          <Property Type="Int32" Name="ClanID" Nullable="false" />
+          <Property Type="Int32" Name="UlaznicaID" Nullable="false" />
+          <Property Type="Int32" Name="ProjekcijaID" Nullable="false" />
+          <Property Type="Int32" Name="ZanrID" Nullable="false" />
+          <Property Type="String" Name="Naziv_Filma" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="Zanr" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="Vrijeme_Rezervacije" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Korisnicko_Ime" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Napomena" Nullable="true" MaxLength="150" />
+          <Property Type="Int32" Name="UslugaID" Nullable="false" />
+          <Property Type="Decimal" Name="Cijena" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="Naziv" Nullable="false" MaxLength="150" />
+        </ComplexType>
+        <ComplexType Name="esp_Rezervacije_GetProcesirane_Result">
+          <Property Type="Int32" Name="RezervacijaID" Nullable="false" />
+          <Property Type="Int32" Name="ClanID" Nullable="false" />
+          <Property Type="Int32" Name="UlaznicaID" Nullable="false" />
+          <Property Type="Int32" Name="ProjekcijaID" Nullable="false" />
+          <Property Type="Int32" Name="ZanrID" Nullable="false" />
+          <Property Type="String" Name="Naziv_Filma" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="Zanr" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="Vrijeme_Rezervacije" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Korisnicko_Ime" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Napomena" Nullable="true" MaxLength="150" />
+          <Property Type="Int32" Name="UslugaID" Nullable="false" />
+          <Property Type="Decimal" Name="Cijena" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="Naziv" Nullable="false" MaxLength="150" />
+        </ComplexType>
+        <ComplexType Name="Projekcije_Dvorana_Result">
+          <Property Type="Int32" Name="ProjekcijaID" Nullable="false" />
+          <Property Type="String" Name="Film" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="Vrsta_usluge" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="Dvorana" Nullable="false" MaxLength="25" />
+          <Property Type="DateTime" Name="Datum_projekcije" Nullable="false" Precision="23" />
+          <Property Type="Boolean" Name="Aktivna" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Projekcije_Usluga_Result">
+          <Property Type="Int32" Name="ProjekcijaID" Nullable="false" />
+          <Property Type="String" Name="Film" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="Vrsta_usluge" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="Dvorana" Nullable="false" MaxLength="25" />
+          <Property Type="DateTime" Name="Datum_projekcije" Nullable="false" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="Filmovi_Zanr_Result">
+          <Property Type="Int32" Name="FilmID" Nullable="false" />
+          <Property Type="String" Name="Naziv" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="IzvorniNaziv" Nullable="false" MaxLength="150" />
+          <Property Type="Int16" Name="GodinaIzdavanja" Nullable="false" />
+          <Property Type="Int16" Name="Trajanje" Nullable="false" />
+          <Property Type="String" Name="Zanr" Nullable="false" MaxLength="50" />
+          <Property Type="Binary" Name="SlikaThumb" Nullable="true" />
+          <Property Type="Boolean" Name="Aktivan" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Projekcije_All_Result">
+          <Property Type="Int32" Name="ProjekcijaID" Nullable="false" />
+          <Property Type="String" Name="Film" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="Usluga" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="Dvorana" Nullable="false" MaxLength="25" />
+          <Property Type="DateTime" Name="DatumProjekcije" Nullable="false" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="Projekcije_Result">
+          <Property Type="Int32" Name="ProjekcijaID" Nullable="false" />
+          <Property Type="String" Name="Film" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="Vrsta_usluge" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="Dvorana" Nullable="false" MaxLength="25" />
+          <Property Type="Binary" Name="SlikaThumb" Nullable="true" />
+          <Property Type="Boolean" Name="Aktivna" Nullable="false" />
+          <Property Type="DateTime" Name="DatumProjekcije" Nullable="false" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="esp_Rezervacije_GetByClanID_Result">
+          <Property Type="Int32" Name="RezervacijaID" Nullable="false" />
+          <Property Type="String" Name="Naziv" Nullable="false" MaxLength="150" />
+          <Property Type="Int16" Name="Trajanje" Nullable="false" />
+          <Property Type="DateTime" Name="VrijemeRezervacije" Nullable="false" Precision="23" />
+          <Property Type="Binary" Name="SlikaThumb" Nullable="true" />
+          <Property Type="Int32" Name="Ulaznica" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="esp_Rezervacije_GetUkupnoByYear_Result">
+          <Property Type="Int32" Name="Broj_Rezervacija" Nullable="true" />
+          <Property Type="Decimal" Name="Ukupno_potrošeno" Nullable="true" Precision="38" Scale="0" />
+        </ComplexType>
+        <ComplexType Name="esp_Filmovi_GetByID_Result">
+          <Property Type="Int32" Name="FilmID" Nullable="false" />
+          <Property Type="String" Name="Naziv" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="IzvorniNaziv" Nullable="false" MaxLength="150" />
+          <Property Type="Int16" Name="GodinaIzdavanja" Nullable="false" />
+          <Property Type="Int16" Name="Trajanje" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Filmovi_GetByID_Result">
+          <Property Type="Int32" Name="FilmID" Nullable="false" />
+          <Property Type="String" Name="Naziv" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="IzvorniNaziv" Nullable="false" MaxLength="150" />
+          <Property Type="Int16" Name="GodinaIzdavanja" Nullable="false" />
+          <Property Type="Int16" Name="Trajanje" Nullable="false" />
+          <Property Type="Binary" Name="SlikaThumb" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="esp_Usluge_GetByName_Result">
+          <Property Type="Int32" Name="UslugaID" Nullable="false" />
+          <Property Type="String" Name="Naziv" Nullable="false" MaxLength="150" />
+          <Property Type="Decimal" Name="Cijena" Nullable="false" Precision="18" Scale="0" />
+        </ComplexType>
+        <Association Name="FK_Clanovi_Zanrovi">
+          <End Type="eKinoModel.Zanrovi" Role="Zanrovi" Multiplicity="1" />
+          <End Type="eKinoModel.Clanovi" Role="Clanovi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zanrovi">
+              <PropertyRef Name="ZanrID" />
+            </Principal>
+            <Dependent Role="Clanovi">
+              <PropertyRef Name="ZanrID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="esp_Rezervacije_GetAktivneByClanID_Result">
+          <Property Type="Int32" Name="RezervacijaID" Nullable="false" />
+          <Property Type="String" Name="Naziv" Nullable="false" MaxLength="150" />
+          <Property Type="Int16" Name="Trajanje" Nullable="false" />
+          <Property Type="DateTime" Name="VrijemeRezervacije" Nullable="false" Precision="23" />
+          <Property Type="Binary" Name="SlikaThumb" Nullable="true" />
+          <Property Type="Int32" Name="Ulaznica" Nullable="true" />
+          <Property Type="Int32" Name="FilmID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="esp_Rezervacije_GetProcesiraneByClanID_Result">
+          <Property Type="Int32" Name="RezervacijaID" Nullable="false" />
+          <Property Type="String" Name="Naziv" Nullable="false" MaxLength="150" />
+          <Property Type="Int16" Name="Trajanje" Nullable="false" />
+          <Property Type="DateTime" Name="VrijemeRezervacije" Nullable="false" Precision="23" />
+          <Property Type="Binary" Name="SlikaThumb" Nullable="true" />
+          <Property Type="Int32" Name="Ulaznica" Nullable="true" />
+          <Property Type="Int32" Name="FilmID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="esp_Rezervacije_GetKarte_Result">
+          <Property Type="String" Name="Zanr" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Napomena" Nullable="true" MaxLength="150" />
+          <Property Type="Decimal" Name="Cijena" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="Naziv" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="Sjedalo" Nullable="true" MaxLength="31" />
+          <Property Type="String" Name="Dvorana" Nullable="false" MaxLength="25" />
+          <Property Type="Int32" Name="UlaznicaID" Nullable="false" />
+          <Property Type="String" Name="Naziv_Filma" Nullable="false" MaxLength="150" />
+          <Property Type="DateTime" Name="Vrijeme_Rezervacije" Nullable="false" Precision="23" />
+          </ComplexType>
+        <ComplexType Name="Filmovi_Zarada_Result">
+          <Property Type="String" Name="Naziv" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="IzvorniNaziv" Nullable="false" MaxLength="150" />
+          <Property Type="Int16" Name="GodinaIzdavanja" Nullable="false" />
+          <Property Type="Int32" Name="Broj_prodanih_ulaznica" Nullable="true" />
+          <Property Type="Decimal" Name="Zarada" Nullable="true" Precision="38" Scale="0" />
+        </ComplexType>
+        <ComplexType Name="esp_Rezervacije_GetDetails_Result">
+          <Property Type="String" Name="Naziv" Nullable="false" MaxLength="150" />
+          <Property Type="DateTime" Name="DatumProjekcije" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Dvorana" Nullable="false" MaxLength="25" />
+          <Property Type="Decimal" Name="Cijena" Nullable="true" Precision="38" Scale="0" />
+          <Property Type="Int32" Name="Broj_Ulaznica" Nullable="true" />
+          <Property Type="Int16" Name="Red" Nullable="false" />
+          <Property Type="Int16" Name="Mjesto" Nullable="false" />
+          <Property Type="Binary" Name="SlikaThumb" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="esp_Sjedala_GetByRezervacija_Result">
+          <Property Type="Int32" Name="SjedaloID" Nullable="false" />
+          <Property Type="Int32" Name="DvoranaID" Nullable="false" />
+          <Property Type="Int16" Name="PozicijaX" Nullable="false" />
+          <Property Type="Int16" Name="PozicijaY" Nullable="false" />
+          <Property Type="Boolean" Name="isZauzeto" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="esp_Rezervacije_GetKartuByUlaznica_Result">
+          <Property Type="Int32" Name="UlaznicaID" Nullable="false" />
+          <Property Type="String" Name="Naziv_Filma" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="Zanr" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="Vrijeme_Rezervacije" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Napomena" Nullable="true" MaxLength="150" />
+          <Property Type="Decimal" Name="Cijena" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="Naziv" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="Dvorana" Nullable="false" MaxLength="25" />
+          <Property Type="String" Name="Sjedalo" Nullable="true" MaxLength="31" />
+        </ComplexType>
+        <ComplexType Name="esp_Rezervacije_GetByKorisnickoIme_Result">
+          <Property Type="Int32" Name="ClanID" Nullable="false" />
+          <Property Type="Int32" Name="Ulaznice" Nullable="true" />
+          <Property Type="String" Name="Zanr" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Naziv_Filma" Nullable="false" MaxLength="150" />
+          <Property Type="DateTime" Name="Vrijeme_Rezervacije" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Korisnicko_Ime" Nullable="false" MaxLength="50" />
+          </ComplexType>
+        <ComplexType Name="esp_Filmovi_Search_Result">
+          <Property Type="Int32" Name="FilmID" Nullable="false" />
+          <Property Type="String" Name="Naziv" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="IzvorniNaziv" Nullable="false" MaxLength="150" />
+          <Property Type="Int16" Name="GodinaIzdavanja" Nullable="false" />
+          <Property Type="Int16" Name="Trajanje" Nullable="false" />
+          <Property Type="Boolean" Name="Aktivan" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="eKinoModelStoreContainer" CdmEntityContainer="eKinoEntities">
+          <EntitySetMapping Name="Clanovi">
+            <EntityTypeMapping TypeName="eKinoModel.Clanovi">
+              <MappingFragment StoreEntitySet="Clanovi">
+                <ScalarProperty Name="ZanrID" ColumnName="ZanrID" />
+                <ScalarProperty Name="ClanID" ColumnName="ClanID" />
+                <ScalarProperty Name="Ime" ColumnName="Ime" />
+                <ScalarProperty Name="Prezime" ColumnName="Prezime" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="DatumRegistracije" ColumnName="DatumRegistracije" />
+                <ScalarProperty Name="KorisnickoIme" ColumnName="KorisnickoIme" />
+                <ScalarProperty Name="LozinkaHash" ColumnName="LozinkaHash" />
+                <ScalarProperty Name="LozinkaSalt" ColumnName="LozinkaSalt" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Slika" ColumnName="Slika" />
+                <ScalarProperty Name="SlikaThumb" ColumnName="SlikaThumb" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dvorane">
+            <EntityTypeMapping TypeName="eKinoModel.Dvorane">
+              <MappingFragment StoreEntitySet="Dvorane">
+                <ScalarProperty Name="DvoranaID" ColumnName="DvoranaID" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="Kapacitet" ColumnName="Kapacitet" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Filmovi">
+            <EntityTypeMapping TypeName="eKinoModel.Filmovi">
+              <MappingFragment StoreEntitySet="Filmovi">
+                <ScalarProperty Name="Aktivan" ColumnName="Aktivan" />
+                <ScalarProperty Name="FilmID" ColumnName="FilmID" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="IzvorniNaziv" ColumnName="IzvorniNaziv" />
+                <ScalarProperty Name="GodinaIzdavanja" ColumnName="GodinaIzdavanja" />
+                <ScalarProperty Name="Trajanje" ColumnName="Trajanje" />
+                <ScalarProperty Name="Opis" ColumnName="Opis" />
+                <ScalarProperty Name="Slika" ColumnName="Slika" />
+                <ScalarProperty Name="SlikaThumb" ColumnName="SlikaThumb" />
+                <ScalarProperty Name="Trailer" ColumnName="Trailer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FilmoviZanrovi">
+            <EntityTypeMapping TypeName="eKinoModel.FilmoviZanrovi">
+              <MappingFragment StoreEntitySet="FilmoviZanrovi">
+                <ScalarProperty Name="FilmZanrID" ColumnName="FilmZanrID" />
+                <ScalarProperty Name="FilmID" ColumnName="FilmID" />
+                <ScalarProperty Name="ZanrID" ColumnName="ZanrID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Korisnici">
+            <EntityTypeMapping TypeName="eKinoModel.Korisnici">
+              <MappingFragment StoreEntitySet="Korisnici">
+                <ScalarProperty Name="KorisnikID" ColumnName="KorisnikID" />
+                <ScalarProperty Name="Ime" ColumnName="Ime" />
+                <ScalarProperty Name="Prezime" ColumnName="Prezime" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="KorisnickoIme" ColumnName="KorisnickoIme" />
+                <ScalarProperty Name="LozinkaHash" ColumnName="LozinkaHash" />
+                <ScalarProperty Name="LozinkaSalt" ColumnName="LozinkaSalt" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Slika" ColumnName="Slika" />
+                <ScalarProperty Name="SlikaThumb" ColumnName="SlikaThumb" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KorisniciUloge">
+            <EntityTypeMapping TypeName="eKinoModel.KorisniciUloge">
+              <MappingFragment StoreEntitySet="KorisniciUloge">
+                <ScalarProperty Name="KorisnikUlogaID" ColumnName="KorisnikUlogaID" />
+                <ScalarProperty Name="KorisnikID" ColumnName="KorisnikID" />
+                <ScalarProperty Name="UlogaID" ColumnName="UlogaID" />
+                <ScalarProperty Name="DatumIzmjene" ColumnName="DatumIzmjene" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ocjene">
+            <EntityTypeMapping TypeName="eKinoModel.Ocjene">
+              <MappingFragment StoreEntitySet="Ocjene">
+                <ScalarProperty Name="OcjenaID" ColumnName="OcjenaID" />
+                <ScalarProperty Name="FilmID" ColumnName="FilmID" />
+                <ScalarProperty Name="ClanID" ColumnName="ClanID" />
+                <ScalarProperty Name="Datum" ColumnName="Datum" />
+                <ScalarProperty Name="Ocjena" ColumnName="Ocjena" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Projekcije">
+            <EntityTypeMapping TypeName="eKinoModel.Projekcije">
+              <MappingFragment StoreEntitySet="Projekcije">
+                <ScalarProperty Name="Aktivna" ColumnName="Aktivna" />
+                <ScalarProperty Name="ProjekcijaID" ColumnName="ProjekcijaID" />
+                <ScalarProperty Name="FilmID" ColumnName="FilmID" />
+                <ScalarProperty Name="DvoranaID" ColumnName="DvoranaID" />
+                <ScalarProperty Name="UslugaID" ColumnName="UslugaID" />
+                <ScalarProperty Name="DatumProjekcije" ColumnName="DatumProjekcije" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rezervacije">
+            <EntityTypeMapping TypeName="eKinoModel.Rezervacije">
+              <MappingFragment StoreEntitySet="Rezervacije">
+                <ScalarProperty Name="RezervacijaID" ColumnName="RezervacijaID" />
+                <ScalarProperty Name="VrijemeRezervacije" ColumnName="VrijemeRezervacije" />
+                <ScalarProperty Name="Napomena" ColumnName="Napomena" />
+                <ScalarProperty Name="ClanID" ColumnName="ClanID" />
+                <ScalarProperty Name="KorisnikID" ColumnName="KorisnikID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sjedala">
+            <EntityTypeMapping TypeName="eKinoModel.Sjedala">
+              <MappingFragment StoreEntitySet="Sjedala">
+                <ScalarProperty Name="isZauzeto" ColumnName="isZauzeto" />
+                <ScalarProperty Name="SjedaloID" ColumnName="SjedaloID" />
+                <ScalarProperty Name="DvoranaID" ColumnName="DvoranaID" />
+                <ScalarProperty Name="PozicijaX" ColumnName="PozicijaX" />
+                <ScalarProperty Name="PozicijaY" ColumnName="PozicijaY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ulaznice">
+            <EntityTypeMapping TypeName="eKinoModel.Ulaznice">
+              <MappingFragment StoreEntitySet="Ulaznice">
+                <ScalarProperty Name="Procesirano" ColumnName="Procesirano" />
+                <ScalarProperty Name="UlaznicaID" ColumnName="UlaznicaID" />
+                <ScalarProperty Name="ProjekcijaID" ColumnName="ProjekcijaID" />
+                <ScalarProperty Name="SjedaloID" ColumnName="SjedaloID" />
+                <ScalarProperty Name="RezervacijaID" ColumnName="RezervacijaID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Uloge">
+            <EntityTypeMapping TypeName="eKinoModel.Uloge">
+              <MappingFragment StoreEntitySet="Uloge">
+                <ScalarProperty Name="UlogaID" ColumnName="UlogaID" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="Opis" ColumnName="Opis" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usluge">
+            <EntityTypeMapping TypeName="eKinoModel.Usluge">
+              <MappingFragment StoreEntitySet="Usluge">
+                <ScalarProperty Name="UslugaID" ColumnName="UslugaID" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="Cijena" ColumnName="Cijena" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Zanrovi">
+            <EntityTypeMapping TypeName="eKinoModel.Zanrovi">
+              <MappingFragment StoreEntitySet="Zanrovi">
+                <ScalarProperty Name="ZanrID" ColumnName="ZanrID" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="esp_Filmovi_Insert" FunctionName="eKinoModel.Store.esp_Filmovi_Insert" />
+          <FunctionImportMapping FunctionImportName="esp_Filmovi_SelectByNaziv" FunctionName="eKinoModel.Store.esp_Filmovi_SelectByNaziv">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="eKinoModel.Filmovi_Result">
+                <ScalarProperty Name="FilmID" ColumnName="FilmID" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="IzvorniNaziv" ColumnName="IzvorniNaziv" />
+                <ScalarProperty Name="GodinaIzdavanja" ColumnName="GodinaIzdavanja" />
+                <ScalarProperty Name="Trajanje" ColumnName="Trajanje" />
+                <ScalarProperty Name="Aktivan" ColumnName="Aktivan" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="esp_Filmovi_SelectByZanr" FunctionName="eKinoModel.Store.esp_Filmovi_SelectByZanr">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="eKinoModel.Filmovi_Zanr_Result">
+                <ScalarProperty Name="FilmID" ColumnName="FilmID" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="IzvorniNaziv" ColumnName="IzvorniNaziv" />
+                <ScalarProperty Name="GodinaIzdavanja" ColumnName="GodinaIzdavanja" />
+                <ScalarProperty Name="Trajanje" ColumnName="Trajanje" />
+                <ScalarProperty Name="Zanr" ColumnName="Zanr" />
+                <ScalarProperty Name="SlikaThumb" ColumnName="SlikaThumb" />
+                <ScalarProperty Name="Aktivan" ColumnName="Aktivan" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="esp_Filmovi_Update" FunctionName="eKinoModel.Store.esp_Filmovi_Update" />
+          <FunctionImportMapping FunctionImportName="esp_FilmoviOsobe_Insert" FunctionName="eKinoModel.Store.esp_FilmoviOsobe_Insert" />
+          <FunctionImportMapping FunctionImportName="esp_FilmoviZanrovi_Insert" FunctionName="eKinoModel.Store.esp_FilmoviZanrovi_Insert" />
+          <FunctionImportMapping FunctionImportName="esp_Korisnici_Insert" FunctionName="eKinoModel.Store.esp_Korisnici_Insert" />
+          <FunctionImportMapping FunctionImportName="esp_Korisnici_SelectByImePrezime" FunctionName="eKinoModel.Store.esp_Korisnici_SelectByImePrezime">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="eKinoModel.Korisnici_Result">
+                <ScalarProperty Name="KorisnikID" ColumnName="KorisnikID" />
+                <ScalarProperty Name="Ime" ColumnName="Ime" />
+                <ScalarProperty Name="Prezime" ColumnName="Prezime" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="KorisnickoIme" ColumnName="KorisnickoIme" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="esp_Korisnici_SelectByKorisnickoIme" FunctionName="eKinoModel.Store.esp_Korisnici_SelectByKorisnickoIme">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="esp_Korisnici_Update" FunctionName="eKinoModel.Store.esp_Korisnici_Update" />
+          <FunctionImportMapping FunctionImportName="esp_KorisniciUloge_Insert" FunctionName="eKinoModel.Store.esp_KorisniciUloge_Insert" />
+          <FunctionImportMapping FunctionImportName="esp_Projekcije_Insert" FunctionName="eKinoModel.Store.esp_Projekcije_Insert" />
+          <FunctionImportMapping FunctionImportName="esp_Projekcije_SelectByDvorana" FunctionName="eKinoModel.Store.esp_Projekcije_SelectByDvorana">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="eKinoModel.Projekcije_Dvorana_Result">
+                <ScalarProperty Name="ProjekcijaID" ColumnName="ProjekcijaID" />
+                <ScalarProperty Name="Film" ColumnName="Film" />
+                <ScalarProperty Name="Vrsta_usluge" ColumnName="Vrsta usluge" />
+                <ScalarProperty Name="Dvorana" ColumnName="Dvorana" />
+                <ScalarProperty Name="Datum_projekcije" ColumnName="Datum projekcije" />
+                <ScalarProperty Name="Aktivna" ColumnName="Aktivna" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="esp_Projekcije_SelectByNazivFilma" FunctionName="eKinoModel.Store.esp_Projekcije_SelectByNazivFilma">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="eKinoModel.Projekcije_Result">
+                <ScalarProperty Name="ProjekcijaID" ColumnName="ProjekcijaID" />
+                <ScalarProperty Name="Film" ColumnName="Film" />
+                <ScalarProperty Name="Vrsta_usluge" ColumnName="Vrsta usluge" />
+                <ScalarProperty Name="Dvorana" ColumnName="Dvorana" />
+                <ScalarProperty Name="SlikaThumb" ColumnName="SlikaThumb" />
+                <ScalarProperty Name="Aktivna" ColumnName="Aktivna" />
+                <ScalarProperty Name="DatumProjekcije" ColumnName="DatumProjekcije" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="esp_Projekcije_SelectByUsluga" FunctionName="eKinoModel.Store.esp_Projekcije_SelectByUsluga">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="eKinoModel.Projekcije_Usluga_Result">
+                <ScalarProperty Name="ProjekcijaID" ColumnName="ProjekcijaID" />
+                <ScalarProperty Name="Film" ColumnName="Film" />
+                <ScalarProperty Name="Vrsta_usluge" ColumnName="Vrsta usluge" />
+                <ScalarProperty Name="Dvorana" ColumnName="Dvorana" />
+                <ScalarProperty Name="Datum_projekcije" ColumnName="Datum projekcije" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="esp_Projekcije_Update" FunctionName="eKinoModel.Store.esp_Projekcije_Update" />
+          <FunctionImportMapping FunctionImportName="esp_Zanrovi_Update" FunctionName="eKinoModel.Store.esp_Zanrovi_Update" />
+          <FunctionImportMapping FunctionImportName="esp_Clanovi_SelectByNaziv" FunctionName="eKinoModel.Store.esp_Clanovi_SelectByNaziv">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="esp_Clanovi_StatusFalse" FunctionName="eKinoModel.Store.esp_Clanovi_StatusFalse" />
+          <FunctionImportMapping FunctionImportName="esp_Clanovi_StatusTrue" FunctionName="eKinoModel.Store.esp_Clanovi_StatusTrue" />
+          <FunctionImportMapping FunctionImportName="esp_Dvorane_GetDvoranaByNaziv" FunctionName="eKinoModel.Store.esp_Dvorane_GetDvoranaByNaziv">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="esp_Dvorane_SelectByNaziv" FunctionName="eKinoModel.Store.esp_Dvorane_SelectByNaziv">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="esp_Dvorane_Update" FunctionName="eKinoModel.Store.esp_Dvorane_Update" />
+          <FunctionImportMapping FunctionImportName="esp_Rezervacije_GetByClanovi" FunctionName="eKinoModel.Store.esp_Rezervacije_GetByClanovi">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="eKinoModel.esp_Rezervacije_GetByClanovi_Result">
+                <ScalarProperty Name="RezervacijaID" ColumnName="RezervacijaID" />
+                <ScalarProperty Name="ClanID" ColumnName="ClanID" />
+                <ScalarProperty Name="UlaznicaID" ColumnName="UlaznicaID" />
+                <ScalarProperty Name="ProjekcijaID" ColumnName="ProjekcijaID" />
+                <ScalarProperty Name="ZanrID" ColumnName="ZanrID" />
+                <ScalarProperty Name="Naziv_Filma" ColumnName="Naziv Filma" />
+                <ScalarProperty Name="Zanr" ColumnName="Zanr" />
+                <ScalarProperty Name="Vrijeme_Rezervacije" ColumnName="Vrijeme Rezervacije" />
+                <ScalarProperty Name="Korisnicko_Ime" ColumnName="Korisnicko Ime" />
+                <ScalarProperty Name="Napomena" ColumnName="Napomena" />
+                <ScalarProperty Name="UslugaID" ColumnName="UslugaID" />
+                <ScalarProperty Name="Cijena" ColumnName="Cijena" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="esp_Rezervacije_GetByFilmovi" FunctionName="eKinoModel.Store.esp_Rezervacije_GetByFilmovi">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="eKinoModel.esp_Rezervacije_GetByKorisnickoIme_Result">
+                <ScalarProperty Name="ClanID" ColumnName="ClanID" />
+                <ScalarProperty Name="Ulaznice" ColumnName="Ulaznice" />
+                <ScalarProperty Name="Zanr" ColumnName="Zanr" />
+                <ScalarProperty Name="Naziv_Filma" ColumnName="Naziv_Filma" />
+                <ScalarProperty Name="Vrijeme_Rezervacije" ColumnName="Vrijeme_Rezervacije" />
+                <ScalarProperty Name="Korisnicko_Ime" ColumnName="Korisnicko_Ime" />
+                </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="esp_Rezervacije_GetByZanrovi" FunctionName="eKinoModel.Store.esp_Rezervacije_GetByZanrovi">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="eKinoModel.esp_Rezervacije_GetByKorisnickoIme_Result">
+                <ScalarProperty Name="ClanID" ColumnName="ClanID" />
+                <ScalarProperty Name="Ulaznice" ColumnName="Ulaznice" />
+                <ScalarProperty Name="Zanr" ColumnName="Zanr" />
+                </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="esp_Rezervacije_GetProcesirane" FunctionName="eKinoModel.Store.esp_Rezervacije_GetProcesirane">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="eKinoModel.esp_Rezervacije_GetProcesirane_Result">
+                <ScalarProperty Name="RezervacijaID" ColumnName="RezervacijaID" />
+                <ScalarProperty Name="ClanID" ColumnName="ClanID" />
+                <ScalarProperty Name="UlaznicaID" ColumnName="UlaznicaID" />
+                <ScalarProperty Name="ProjekcijaID" ColumnName="ProjekcijaID" />
+                <ScalarProperty Name="ZanrID" ColumnName="ZanrID" />
+                <ScalarProperty Name="Naziv_Filma" ColumnName="Naziv Filma" />
+                <ScalarProperty Name="Zanr" ColumnName="Zanr" />
+                <ScalarProperty Name="Vrijeme_Rezervacije" ColumnName="Vrijeme Rezervacije" />
+                <ScalarProperty Name="Korisnicko_Ime" ColumnName="Korisnicko Ime" />
+                <ScalarProperty Name="Napomena" ColumnName="Napomena" />
+                <ScalarProperty Name="UslugaID" ColumnName="UslugaID" />
+                <ScalarProperty Name="Cijena" ColumnName="Cijena" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="esp_Rezervacije_UpdateStatus" FunctionName="eKinoModel.Store.esp_Rezervacije_UpdateStatus" />
+          <FunctionImportMapping FunctionImportName="esp_Osobe_Insert" FunctionName="eKinoModel.Store.esp_Osobe_Insert" />
+          <FunctionImportMapping FunctionImportName="esp_Clanovi_Insert" FunctionName="eKinoModel.Store.esp_Clanovi_Insert" />
+          <FunctionImportMapping FunctionImportName="esp_Projekcije_SelectAll" FunctionName="eKinoModel.Store.esp_Projekcije_SelectAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="eKinoModel.Projekcije_All_Result">
+                <ScalarProperty Name="ProjekcijaID" ColumnName="ProjekcijaID" />
+                <ScalarProperty Name="Film" ColumnName="Film" />
+                <ScalarProperty Name="Usluga" ColumnName="Usluga" />
+                <ScalarProperty Name="Dvorana" ColumnName="Dvorana" />
+                <ScalarProperty Name="DatumProjekcije" ColumnName="DatumProjekcije" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="esp_Projekcije_GetCijena" FunctionName="eKinoModel.Store.esp_Projekcije_GetCijena" />
+          <FunctionImportMapping FunctionImportName="esp_Rezervacije_GetByClanID" FunctionName="eKinoModel.Store.esp_Rezervacije_GetByClanID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="eKinoModel.esp_Rezervacije_GetByClanID_Result">
+                <ScalarProperty Name="RezervacijaID" ColumnName="RezervacijaID" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="Trajanje" ColumnName="Trajanje" />
+                <ScalarProperty Name="VrijemeRezervacije" ColumnName="VrijemeRezervacije" />
+                <ScalarProperty Name="SlikaThumb" ColumnName="SlikaThumb" />
+                <ScalarProperty Name="Ulaznica" ColumnName="Ulaznica" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="esp_Rezervacije_GetUkupnoByYear" FunctionName="eKinoModel.Store.esp_Rezervacije_GetUkupnoByYear">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="eKinoModel.esp_Rezervacije_GetUkupnoByYear_Result">
+                <ScalarProperty Name="Broj_Rezervacija" ColumnName="Broj Rezervacija" />
+                <ScalarProperty Name="Ukupno_potrošeno" ColumnName="Ukupno potrošeno" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="esp_Filmovi_GetByID" FunctionName="eKinoModel.Store.esp_Filmovi_GetByID">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="eKinoModel.Filmovi_GetByID_Result">
+                <ScalarProperty Name="FilmID" ColumnName="FilmID" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="IzvorniNaziv" ColumnName="IzvorniNaziv" />
+                <ScalarProperty Name="GodinaIzdavanja" ColumnName="GodinaIzdavanja" />
+                <ScalarProperty Name="Trajanje" ColumnName="Trajanje" />
+                <ScalarProperty Name="SlikaThumb" ColumnName="SlikaThumb" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="esp_Ocjene_Insert" FunctionName="eKinoModel.Store.esp_Ocjene_Insert" />
+          <FunctionImportMapping FunctionImportName="esp_Filmovi_GetProsjek" FunctionName="eKinoModel.Store.esp_Filmovi_GetProsjek" />
+          <FunctionImportMapping FunctionImportName="esp_Usluge_GetByName" FunctionName="eKinoModel.Store.esp_Usluge_GetByName">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="esp_Rezervacije_GetAktivneByClanID" FunctionName="eKinoModel.Store.esp_Rezervacije_GetAktivneByClanID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="eKinoModel.esp_Rezervacije_GetAktivneByClanID_Result">
+                <ScalarProperty Name="RezervacijaID" ColumnName="RezervacijaID" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="Trajanje" ColumnName="Trajanje" />
+                <ScalarProperty Name="VrijemeRezervacije" ColumnName="VrijemeRezervacije" />
+                <ScalarProperty Name="SlikaThumb" ColumnName="SlikaThumb" />
+                <ScalarProperty Name="Ulaznica" ColumnName="Ulaznica" />
+                <ScalarProperty Name="FilmID" ColumnName="FilmID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="esp_Rezervacije_GetProcesiraneByClanID" FunctionName="eKinoModel.Store.esp_Rezervacije_GetProcesiraneByClanID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="eKinoModel.esp_Rezervacije_GetProcesiraneByClanID_Result">
+                <ScalarProperty Name="RezervacijaID" ColumnName="RezervacijaID" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="Trajanje" ColumnName="Trajanje" />
+                <ScalarProperty Name="VrijemeRezervacije" ColumnName="VrijemeRezervacije" />
+                <ScalarProperty Name="SlikaThumb" ColumnName="SlikaThumb" />
+                <ScalarProperty Name="Ulaznica" ColumnName="Ulaznica" />
+                <ScalarProperty Name="FilmID" ColumnName="FilmID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="esp_Rezervacije_GetKarte" FunctionName="eKinoModel.Store.esp_Rezervacije_GetKarte">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="eKinoModel.esp_Rezervacije_GetKarte_Result">
+                <ScalarProperty Name="Zanr" ColumnName="Zanr" />
+                <ScalarProperty Name="Napomena" ColumnName="Napomena" />
+                <ScalarProperty Name="Cijena" ColumnName="Cijena" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="Sjedalo" ColumnName="Sjedalo" />
+                <ScalarProperty Name="Dvorana" ColumnName="Dvorana" />
+                <ScalarProperty Name="UlaznicaID" ColumnName="UlaznicaID" />
+                <ScalarProperty Name="Naziv_Filma" ColumnName="Naziv_Filma" />
+                <ScalarProperty Name="Vrijeme_Rezervacije" ColumnName="Vrijeme_Rezervacije" />
+                </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="esp_Filmovi_SelectByZarada" FunctionName="eKinoModel.Store.esp_Filmovi_SelectByZarada">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="eKinoModel.Filmovi_Zarada_Result">
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="IzvorniNaziv" ColumnName="IzvorniNaziv" />
+                <ScalarProperty Name="GodinaIzdavanja" ColumnName="GodinaIzdavanja" />
+                <ScalarProperty Name="Broj_prodanih_ulaznica" ColumnName="Broj prodanih ulaznica" />
+                <ScalarProperty Name="Zarada" ColumnName="Zarada" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="esp_Projekcije_SelectByGodina" FunctionName="eKinoModel.Store.esp_Projekcije_SelectByGodina" />
+          <FunctionImportMapping FunctionImportName="esp_Rezervacije_GetDetails" FunctionName="eKinoModel.Store.esp_Rezervacije_GetDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="eKinoModel.esp_Rezervacije_GetDetails_Result">
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="DatumProjekcije" ColumnName="DatumProjekcije" />
+                <ScalarProperty Name="Dvorana" ColumnName="Dvorana" />
+                <ScalarProperty Name="Cijena" ColumnName="Cijena" />
+                <ScalarProperty Name="Broj_Ulaznica" ColumnName="Broj Ulaznica" />
+                <ScalarProperty Name="Red" ColumnName="Red" />
+                <ScalarProperty Name="Mjesto" ColumnName="Mjesto" />
+                <ScalarProperty Name="SlikaThumb" ColumnName="SlikaThumb" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="esp_Sjedala_GetByRezervacija" FunctionName="eKinoModel.Store.esp_Sjedala_GetByRezervacija">
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="esp_Rezervacije_GetKartuByUlaznica" FunctionName="eKinoModel.Store.esp_Rezervacije_GetKartuByUlaznica">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="eKinoModel.esp_Rezervacije_GetKarte_Result">
+                <ScalarProperty Name="Zanr" ColumnName="Zanr" />
+                <ScalarProperty Name="Napomena" ColumnName="Napomena" />
+                <ScalarProperty Name="Cijena" ColumnName="Cijena" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="Sjedalo" ColumnName="Sjedalo" />
+                <ScalarProperty Name="Dvorana" ColumnName="Dvorana" />
+                <ScalarProperty Name="UlaznicaID" ColumnName="UlaznicaID" />
+                <ScalarProperty Name="Naziv_Filma" ColumnName="Naziv Filma" />
+                <ScalarProperty Name="Vrijeme_Rezervacije" ColumnName="Vrijeme Rezervacije" />
+                </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="esp_Rezervacije_GetByKorisnickoIme" FunctionName="eKinoModel.Store.esp_Rezervacije_GetByKorisnickoIme">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="eKinoModel.esp_Rezervacije_GetByKorisnickoIme_Result">
+                <ScalarProperty Name="ClanID" ColumnName="ClanID" />
+                <ScalarProperty Name="Ulaznice" ColumnName="Ulaznice" />
+                <ScalarProperty Name="Zanr" ColumnName="Zanr" />
+                </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="esp_Filmovi_Search" FunctionName="eKinoModel.Store.esp_Filmovi_Search">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="eKinoModel.esp_Filmovi_Search_Result">
+                <ScalarProperty Name="FilmID" ColumnName="FilmID" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="IzvorniNaziv" ColumnName="IzvorniNaziv" />
+                <ScalarProperty Name="GodinaIzdavanja" ColumnName="GodinaIzdavanja" />
+                <ScalarProperty Name="Trajanje" ColumnName="Trajanje" />
+                <ScalarProperty Name="Aktivan" ColumnName="Aktivan" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

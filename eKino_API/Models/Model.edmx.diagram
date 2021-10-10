@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="29ed3593f84e49e5874db5ca4c929c8a" Name="Diagram1">
+        <EntityTypeShape EntityType="eKinoModel.Clanovi" Width="1.5" PointX="3.75" PointY="16.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="eKinoModel.Dvorane" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="eKinoModel.Filmovi" Width="1.5" PointX="0.75" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="eKinoModel.FilmoviZanrovi" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="eKinoModel.Korisnici" Width="1.5" PointX="3.75" PointY="20.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="eKinoModel.KorisniciUloge" Width="1.5" PointX="6" PointY="23.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="eKinoModel.Ocjene" Width="1.5" PointX="3" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="eKinoModel.Projekcije" Width="1.5" PointX="6" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="eKinoModel.Rezervacije" Width="1.5" PointX="6" PointY="19.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="eKinoModel.Sjedala" Width="1.5" PointX="6" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="eKinoModel.Ulaznice" Width="1.5" PointX="8.25" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="eKinoModel.Uloge" Width="1.5" PointX="3.75" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="eKinoModel.Usluge" Width="1.5" PointX="3.75" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="eKinoModel.Zanrovi" Width="1.5" PointX="0.75" PointY="3.25" IsExpanded="true" />
+        <AssociationConnector Association="eKinoModel.FK_Ocjene_Clanovi" ManuallyRouted="false" />
+        <AssociationConnector Association="eKinoModel.FK_Rezervacije_Clanovi" ManuallyRouted="false" />
+        <AssociationConnector Association="eKinoModel.FK_Projekcije_Dvorane" ManuallyRouted="false" />
+        <AssociationConnector Association="eKinoModel.FK_Sjedala_Dvorane" ManuallyRouted="false" />
+        <AssociationConnector Association="eKinoModel.FK_FilmoviZanrovi_Filmovi" ManuallyRouted="false" />
+        <AssociationConnector Association="eKinoModel.FK_Ocjene_Filmovi" ManuallyRouted="false" />
+        <AssociationConnector Association="eKinoModel.FK_Projekcije_Filmovi" ManuallyRouted="false" />
+        <AssociationConnector Association="eKinoModel.FK_FilmoviZanrovi_Zanrovi" ManuallyRouted="false" />
+        <AssociationConnector Association="eKinoModel.FK_KorisniciUloge_Korisnici" ManuallyRouted="false" />
+        <AssociationConnector Association="eKinoModel.FK_Rezervacije_Korisnici" ManuallyRouted="false" />
+        <AssociationConnector Association="eKinoModel.FK_KorisniciUloge_Uloge" ManuallyRouted="false" />
+        <AssociationConnector Association="eKinoModel.FK_Projekcije_Usluge" ManuallyRouted="false" />
+        <AssociationConnector Association="eKinoModel.FK_Ulaznice_Projekcije" ManuallyRouted="false" />
+        <AssociationConnector Association="eKinoModel.FK_Ulaznice_Rezervacije" ManuallyRouted="false" />
+        <AssociationConnector Association="eKinoModel.FK_Ulaznice_Sjedala" ManuallyRouted="false" />
+        <AssociationConnector Association="eKinoModel.FK_Clanovi_Zanrovi" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

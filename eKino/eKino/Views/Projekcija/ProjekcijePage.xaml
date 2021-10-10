@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:eKino.Converters"
+             x:Class="eKino.Views.Projekcija.ProjekcijePage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:ImageConverter x:Key="imgConv"></local:ImageConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout Padding="10">
+
+			<DatePicker x:Name="datePicker" MinimumDate="{Binding PropertyMinimumDate}" DateSelected="datePicker_DateSelected"></DatePicker>
+            <StackLayout Margin="5">
+				<ListView x:Name="projekcijeList" RowHeight="120" ItemTapped="projekcijeList_ItemTapped">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Image  Grid.Column="0" Margin="5" Source="{Binding SlikaThumb, Converter={StaticResource imgConv}}"></Image>
+
+                                    <StackLayout Grid.Column="1" Margin="5">
+                                        <Label Text="{Binding Film}" FontAttributes="Bold"></Label>
+										<Label Text="{Binding Dvorana, StringFormat='Dvorana: {0}'}"></Label>
+                                        <Label Text="{Binding DatumProjekcije, StringFormat='{}{0:dd.MM.yyyy hh:mm}'}"/>
+                                    </StackLayout>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:eKino.Converters"
+             x:Class="eKino.Views.Film.FilmoviDetailsPage">
+	<ContentPage.Resources>
+		<ResourceDictionary>
+			<local:ImageConverter x:Key="imgConv"></local:ImageConverter>
+		</ResourceDictionary>
+	</ContentPage.Resources>
+	<ContentPage.Content>
+		<ScrollView>
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto"></ColumnDefinition>
+					<ColumnDefinition Width="Auto"></ColumnDefinition>
+					<ColumnDefinition Width="Auto"></ColumnDefinition>
+					<ColumnDefinition Width="*"></ColumnDefinition>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+				</Grid.RowDefinitions>
+
+				<StackLayout Margin="5" Grid.Column="0" Grid.Row="0">
+					<Image x:Name="FilmImage" ></Image>
+					<Button x:Name="TrailerShow" Text="Trailer" Clicked="TrailerShow_Clicked"></Button>
+				</StackLayout>
+
+				<StackLayout  Margin="5" Grid.Column="1" Grid.Row="0">
+					<Label x:Name="NazivLabel" FontAttributes="Bold" ></Label>
+					<Label x:Name="IzvorniNazivLabel"></Label>
+					<Label x:Name="GodinaIzdavanjaLabel"></Label>
+					<Label x:Name="TrajanjeLabel"></Label>
+					<Label x:Name="ProsjecnaOcjenaLabel" FontAttributes="Bold" ></Label>
+					<Label x:Name="OpisLabel" ></Label>
+					<StackLayout Orientation="Horizontal" x:Name="rating" IsVisible="false">
+						<Picker x:Name="FilmRatings" Title="Odaberite ocjenu"></Picker>
+						<Button x:Name="FilmRate" Text="Ocijeni" Clicked="FilmRate_Clicked"></Button>
+					</StackLayout>
+				</StackLayout>
+
+				<StackLayout Grid.Row="1" Grid.ColumnSpan="2">
+					<Label Text="Aktivne projekcije" FontSize="20" FontAttributes="Bold" Margin="7"></Label>
+                    <Label x:Name ="soon" Text="Uskoro će biti aktivnih projekcija" FontSize="20" IsVisible="False"></Label>
+                    <ListView x:Name="projekcijeList" ItemTapped="projekcijeList_ItemTapped" RowHeight="70" Margin="7">
+						<ListView.ItemTemplate>
+							<DataTemplate>
+								<ViewCell>
+									<StackLayout>
+										<Label Text="{Binding Film,StringFormat='Naziv filma: {0}'}"></Label>
+										<Label Text="{Binding Dvorana,StringFormat='Naziv dvorane: {0}'}"></Label>
+                                        <Label Text="{Binding DatumProjekcije,StringFormat='Datum projekcije: {0}'}"></Label>
+									</StackLayout>
+								</ViewCell>
+							</DataTemplate>
+						</ListView.ItemTemplate>
+					</ListView>
+				</StackLayout>
+
+				<StackLayout Margin="5" Grid.Row="2" Grid.ColumnSpan="2">
+					<Label x:Name="preporukaLabel" Text="Preporučujemo:"></Label>
+
+					<ListView x:Name="filmoviList" RowHeight="40" ItemTapped="filmoviList_ItemTapped">
+						<ListView.ItemTemplate>
+							<DataTemplate>
+								<ViewCell>
+									<Grid>
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="Auto"></ColumnDefinition>
+											<ColumnDefinition Width="Auto"></ColumnDefinition>
+										</Grid.ColumnDefinitions>
+
+										<Image x:Name="image" Grid.Column="0" Source="{Binding SlikaThumb, Converter={StaticResource imgConv}}" Margin="5"></Image>
+
+										<StackLayout Grid.Column="1" Padding="10">
+											<Label Text="{Binding Naziv}" FontAttributes="Bold"></Label>
+											<Label Text="{Binding IzvorniNaziv}"></Label>
+											<Label Text="{Binding Zanr}"></Label>
+										</StackLayout>
+									</Grid>
+								</ViewCell>
+							</DataTemplate>
+						</ListView.ItemTemplate>
+					</ListView>
+				</StackLayout>
+
+			</Grid>
+		</ScrollView>
+	</ContentPage.Content>
+</ContentPage>

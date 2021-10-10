@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="eKino.LoginPage">
+    <ContentPage.Content>
+        <StackLayout Padding="20" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+            <Label Text="Prijava @ eKino" HorizontalOptions="CenterAndExpand" />
+
+            <Entry x:Name="KorisnickoImeInput" Placeholder="Korisničko ime"></Entry>
+            <Entry x:Name="LozinkaInput" IsPassword="True" Placeholder="Lozinka"></Entry>
+            
+            <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+                <Button x:Name="RegisterButton"  Clicked="RegisterButton_Clicked" Text="Registracija"></Button>
+                <Button x:Name="LoginButton" Text="Prijava" Clicked="LoginButton_Clicked"></Button>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

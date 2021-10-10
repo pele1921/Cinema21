@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:eKino.Converters"			 
+             x:Class="eKino.Views.Rezervacija.RezervacijaViewPage">
+	<ContentPage.Resources>
+		<ResourceDictionary>
+			<local:ImageConverter x:Key="imgConv"></local:ImageConverter>
+		</ResourceDictionary>
+	</ContentPage.Resources>
+	<ContentPage.Content>
+		<ScrollView>
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto"></ColumnDefinition>
+					<ColumnDefinition Width="Auto"></ColumnDefinition>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+					<RowDefinition Height="Auto"></RowDefinition>
+				</Grid.RowDefinitions>
+
+				<StackLayout Margin="5" Grid.Column="0" Grid.Row="0">
+					<Image x:Name="FilmImage" ></Image>
+				</StackLayout>
+				<StackLayout Grid.Row="1" Grid.ColumnSpan="2" Margin="5">
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="Auto"></ColumnDefinition>
+							<ColumnDefinition Width="*"></ColumnDefinition>
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto"></RowDefinition>
+							<RowDefinition Height="Auto"></RowDefinition>
+							<RowDefinition Height="Auto"></RowDefinition>
+							<RowDefinition Height="Auto"></RowDefinition>
+							<RowDefinition Height="Auto"></RowDefinition>
+							<RowDefinition Height="Auto"></RowDefinition>
+						</Grid.RowDefinitions>
+
+						
+						<Label Text="Naziv filma: " FontAttributes="Bold" Grid.Row="0" Grid.Column="0"></Label>
+						<Label Text="Datum prikazivanja: " FontAttributes="Bold" Grid.Row="1" Grid.Column="0"></Label>
+						<Label Text="Naziv dvorane: " FontAttributes="Bold" Grid.Row="2" Grid.Column="0"></Label>
+						<Label Text="Cijena: " FontAttributes="Bold" Grid.Row="3" Grid.Column="0"></Label>
+						<Label Text="Sjedala: " FontAttributes="Bold" Grid.Row="4" Grid.Column="0"></Label>
+
+
+						<Entry x:Name="filmLabel" IsEnabled="False" Grid.Row="0" Grid.Column="1"></Entry>
+						<Entry x:Name="datumLabel" IsEnabled="False" Grid.Row="1" Grid.Column="1"></Entry>
+						<Entry x:Name="dvoranaLabel" IsEnabled="False" Grid.Row="2" Grid.Column="1"></Entry>
+						<Entry x:Name="cijenaLabel" IsEnabled="False" Grid.Row="3" Grid.Column="1"></Entry>
+						<Entry x:Name="mjestoLabel" IsEnabled="False" Grid.Row="4" Grid.Column="1"></Entry>
+						
+					</Grid>
+					<Button Text="Otkaži rezervaciju"  Clicked="otkaziButton_Clicked" Grid.Row="2" Grid.ColumnSpan="2"></Button>
+				</StackLayout>
+			</Grid>
+		</ScrollView>
+	</ContentPage.Content>
+</ContentPage>

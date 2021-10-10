@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="eKino.RegistrationPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Registracija @ eKino" 
+                HorizontalOptions="CenterAndExpand" />
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Label Margin="5" Text="Ime" Grid.Row="0" Grid.Column="0"></Label>
+                <Entry x:Name="ImeInput" Grid.Row="0" Grid.Column="1"></Entry>
+
+                <Label Margin="5" Text="Prezime" Grid.Row="1" Grid.Column="0"></Label>
+                <Entry x:Name="PrezimeInput" Grid.Row="1" Grid.Column="1"></Entry>
+
+                <Label Margin="5" Text="Email" Grid.Row="2" Grid.Column="0"></Label>
+                <Entry x:Name="EmailInput" Grid.Row="2" Grid.Column="1"></Entry>
+
+                <Label Margin="5" Text="Omiljeni žanr" Grid.Row="3" Grid.Column="0"></Label>
+                <Picker x:Name="zanroviPicker" Grid.Row="3" Grid.Column="1"></Picker>
+
+                <Label Margin="5" Text="Korisničko ime" Grid.Row="4" Grid.Column="0"></Label>
+                <Entry x:Name="KorisnickoImeInput" Grid.Row="4" Grid.Column="1"></Entry>
+
+                <Label Margin="5" Text="Lozinka" Grid.Row="5" Grid.Column="0"></Label>
+                <Entry x:Name="LozinkaInput" IsPassword="True" Grid.Row="5" Grid.Column="1"></Entry>
+
+                <Button Grid.Row="6" Grid.Column="1" Text="Potvrdi" x:Name="RegisterButton" Clicked="RegisterButton_Clicked"></Button>
+            </Grid>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

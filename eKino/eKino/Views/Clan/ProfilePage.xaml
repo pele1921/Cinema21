@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="eKino.Views.Clan.ProfilePage">
+    <ContentPage.Content>
+            <Grid VerticalOptions="Fill" HorizontalOptions="Fill" Padding="2" Margin="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition  Height="Auto"></RowDefinition>
+                    <RowDefinition  Height="Auto"></RowDefinition>
+                    <RowDefinition  Height="Auto"></RowDefinition>
+                    <RowDefinition  Height="Auto"></RowDefinition>
+                    <RowDefinition  Height="Auto"></RowDefinition>
+                    <RowDefinition  Height="Auto"></RowDefinition>
+                    <RowDefinition  Height="Auto"></RowDefinition>
+                    <RowDefinition  Height="Auto"></RowDefinition>
+					
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0" Text="Ime" VerticalTextAlignment="Center"></Label>
+                <Entry x:Name="ImeInput" Grid.Row="0" Grid.Column="1"  ></Entry>
+
+            <Label Grid.Row="1" Grid.Column="0" Text="Prezime" VerticalTextAlignment="Center"></Label>
+                <Entry x:Name="PrezimeInput" Grid.Row="1" Grid.Column="1"  ></Entry>
+
+                <Label Grid.Row="2" Grid.Column="0" Text="Email" VerticalTextAlignment="Center"></Label>
+                <Entry x:Name="EmailInput" Grid.Row="2" Grid.Column="1" Keyboard="Email"  ></Entry>
+
+                <Label Grid.Row="3" Grid.Column="0" Text="Korisničko ime" VerticalTextAlignment="Center"></Label>
+                <Entry x:Name="KorisnickoImeInput" Grid.Row="3" Grid.Column="1"  ></Entry>
+
+			<Label Grid.Row="4" Grid.Column="0" Text="Preferirani žanr" VerticalTextAlignment="Center"/>
+			<Picker x:Name="zanroviPicker" Grid.Row="4" Grid.Column="1"></Picker>
+				
+			<Label Grid.Row="5" Grid.Column="0" Text="Stara lozinka" VerticalTextAlignment="Center"></Label>
+                <Entry x:Name="StaraLozinkaInput" Grid.Row="5" Grid.Column="1"  IsPassword="true"  ></Entry>
+
+                <Label Grid.Row="6" Grid.Column="0" Text="Nova lozinka" VerticalTextAlignment="Center"></Label>
+                <Entry x:Name="NovaLozinkaInput" Grid.Row="6" Grid.Column="1"   IsPassword="True"></Entry>
+
+                <Button x:Name="BtnUpdate"  Grid.Row="7" Grid.Column="1" Text="Ažuriraj" VerticalOptions="End" Clicked="BtnUpdate_Clicked"></Button>
+            </Grid>
+    </ContentPage.Content>
+</ContentPage>
